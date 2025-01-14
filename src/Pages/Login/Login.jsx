@@ -5,12 +5,14 @@ import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import useAuth from "../../Hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Login = () => {
     const [errMsg, setErrMsg] = useState('');
     const [isVisible, setIsVisible] = useState(false);
     const navigate = useNavigate();
     const { googleLogin, loading, setLoading, loginWithEmainAndPassword} = useAuth();
+    const axiosPublic = useAxiosPublic();
 
     const handleSubmitForm = async(e) =>{
         e.preventDefault();
@@ -38,7 +40,16 @@ const Login = () => {
 
     const handleGoogleLogin = async () => {
         try {
-            await googleLogin();
+            const {user} = await googleLogin();
+
+            const userInfo = {
+                name : user.displayName,
+                email : user.email,
+                photoURL: user.photoURL
+            }
+
+            await axiosPublic.post('/users/new/google' , userInfo);
+            
             toast.success('Login successful' , {
                 duration: 1000,
             })

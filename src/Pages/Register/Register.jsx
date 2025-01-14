@@ -7,6 +7,8 @@ import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { BsBrightnessHighFill } from "react-icons/bs";
 
 const Register = () => {
     const { googleLogin, loading, setLoading, registerWithEmailAndPassword, updateUserProfile } = useAuth();
@@ -14,10 +16,9 @@ const Register = () => {
     const [errMsg, setErrMsg] = useState('');
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
-
-    // useEffect(() => {
-    //     logoutUser();
-    // },[])
+    const axiosPublic = useAxiosPublic();
+    const [registerLoading, setRegisterLoading] = useState(false);
+   
 
     const handleImageUpload = (e) => {
         const imageName = imageNameShorter(e.target.files);
@@ -28,7 +29,7 @@ const Register = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setErrMsg('');
-        setLoading(true);
+        setRegisterLoading(true);
 
         const form = e.target;
         const name = form.name.value;
@@ -47,22 +48,40 @@ const Register = () => {
         const upperCaseRegEx = /[A-Z]/;
         const numaricCaseRegEx = /[0-9]/;
 
+        const userInfo= {email}
+
+        const {data} = await axiosPublic.post('/users', userInfo);
+
+        console.log(data);
+
+        if(!data.message)
+        {
+            setErrMsg('Email already registered');
+            setRegisterLoading(false);
+            return ;
+        }
         if (password.length < 6) {
             setErrMsg('Password should be atleast 6 character');
+            setRegisterLoading(false);
             return;
         }
         if (!lowerCaseRegEx.test(password)) {
             setErrMsg('Password have to contain atleast one lowercase letter [a-z]');
+            setRegisterLoading(false);
             return;
         }
         if (!upperCaseRegEx.test(password)) {
             setErrMsg('Password have to contain atlease one uppercase letter [A-Z]');
+            setRegisterLoading(false);
             return;
         }
         if (!numaricCaseRegEx.test(password)) {
             setErrMsg('Password have to contain atleast one numaric value [0-9]');
+            setRegisterLoading(false);
             return;
         }
+
+
 
         const imageData = new FormData();
         imageData.append('image', image);
@@ -76,11 +95,15 @@ const Register = () => {
         }
 
         try {
+
             //create a user with email and password
             await registerWithEmailAndPassword(email, password);
 
             //update name and photo on user profile
             await updateUserProfile({ displayName: name, photoURL });
+
+            //add new user in database
+            await axiosPublic.post('/users/new', {email,name, photoURL})
 
             toast.success('Registration successful' , {
                 duration: 1000,
@@ -93,12 +116,22 @@ const Register = () => {
         }
         finally {
             setLoading(false);
+            setRegisterLoading(false);
         }
     }
 
     const handleGoogleLogin = async () => {
         try {
-            await googleLogin();
+            const {user} = await googleLogin();
+
+            const userInfo = {
+                name : user.displayName,
+                email : user.email,
+                photoURL: user.photoURL
+            }
+
+            await axiosPublic.post('/users/new/google' , userInfo);
+            
             toast.success('Login successful' , {
                 duration: 1000,
             })
@@ -179,7 +212,12 @@ const Register = () => {
                         }
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn bg-[#003366] text-white hover:bg-[#002B55]">Register</button>
+                        <button className="btn bg-[#003366] text-white hover:bg-[#002B55]">{
+                            registerLoading?
+                            <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
+                            :
+                            'Register'
+                            }</button>
                     </div>
                 </form>
                 <div className="divider w-5/6 mx-auto">OR</div>
