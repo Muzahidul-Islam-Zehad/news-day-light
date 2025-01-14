@@ -7,6 +7,8 @@ import Subscription from "../Pages/Subscription/Subscription";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyArticles from "../Pages/MyArticles/MyArticles";
 import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +44,14 @@ const router = createBrowserRouter([
                 element:<PremiumArticles></PremiumArticles>
             }
         ]
+    },
+    {
+        path:'/login',
+        element:<Login></Login>
+    },
+    {
+        path:'/registration',
+        element: <Register></Register>
     }
 ])
 
