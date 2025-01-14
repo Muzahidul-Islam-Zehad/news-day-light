@@ -6,6 +6,7 @@ import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const { googleLogin, loading, setLoading, registerWithEmailAndPassword, updateUserProfile } = useAuth();
@@ -26,7 +27,8 @@ const Register = () => {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        setErrMsg('')
+        setErrMsg('');
+        setLoading(true);
 
         const form = e.target;
         const name = form.name.value;
@@ -80,6 +82,10 @@ const Register = () => {
             //update name and photo on user profile
             await updateUserProfile({ displayName: name, photoURL });
 
+            toast.success('Registration successful' , {
+                duration: 1000,
+            })
+
             navigate('/');
         }
         catch (err) {
@@ -92,7 +98,10 @@ const Register = () => {
 
     const handleGoogleLogin = async () => {
         try {
-            await googleLogin()
+            await googleLogin();
+            toast.success('Login successful' , {
+                duration: 1000,
+            })
             navigate('/');
         }
         catch (err) {
