@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../Hooks/useAuth";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
-import axios from "axios";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { BsBrightnessHighFill } from "react-icons/bs";
+import { imageUploadToImageBB } from "../../Utilities/UploadImageOnImageBB";
 
 const Register = () => {
     const { googleLogin, loading, setLoading, registerWithEmailAndPassword, updateUserProfile } = useAuth();
@@ -36,8 +36,6 @@ const Register = () => {
         const email = form.email.value;
         const image = form.image.files[0];
         const password = form.password.value;
-
-        let photoURL = '';
 
         if (!name || !email || !image || !password) {
             setErrMsg('(*) marked fields are required')
@@ -83,16 +81,8 @@ const Register = () => {
 
 
 
-        const imageData = new FormData();
-        imageData.append('image', image);
-
-        try {
-            const { data } = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImageBB_API_Key}`, imageData);
-            photoURL = data.data.display_url;
-        }
-        catch (err) {
-            console.log(err);
-        }
+        const photoURL = await imageUploadToImageBB(image)
+        
 
         try {
 
@@ -103,7 +93,7 @@ const Register = () => {
             await updateUserProfile({ displayName: name, photoURL });
 
             //add new user in database
-            await axiosPublic.post('/users/new', {email,name, photoURL})
+            await axiosPublic.post('/users/new', {name,email,photoURL})
 
             toast.success('Registration successful' , {
                 duration: 1000,
@@ -161,18 +151,23 @@ const Register = () => {
                     <hr className="mt-3 w-5/6 mx-auto" />
                 </div>
                 <form onSubmit={handleSubmitForm} className="card-body pb-3">
+                    {/* name field */}
                     <div className="form-control">
                         <label className="label ">
                             <span className="label-text text-[#6C757D]">Name<span className="text-red-600 font-bold">*</span></span>
                         </label>
                         <input type="text" name="name" placeholder="name" className="input input-bordered bg-[#F9FAFB] border border-[#D1D5DB] text-[#333333] focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] placeholder:text-[#A0AEC0]" />
                     </div>
+
+                    {/* email field */}
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-[#6C757D]">Email<span className="text-red-600 font-bold">*</span></span>
                         </label>
                         <input type="email" name="email" placeholder="email" className="input input-bordered bg-[#F9FAFB] border border-[#D1D5DB] text-[#333333] focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] placeholder:text-[#A0AEC0]" />
                     </div>
+
+                    {/* Photo field */}
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-[#6C757D]">Photo<span className="text-red-600 font-bold">*</span></span>
@@ -185,6 +180,8 @@ const Register = () => {
                             <input onChange={handleImageUpload} hidden type="file" name="image" id="" />
                         </label>
                     </div>
+
+                    {/* password field */}
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text text-[#6C757D]">Password<span className="text-red-600 font-bold">*</span></span>
@@ -212,7 +209,7 @@ const Register = () => {
                         }
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn bg-[#003366] text-white hover:bg-[#002B55]">{
+                        <button disabled={registerLoading || loading} className="btn bg-[#003366] text-white hover:bg-[#002B55]">{
                             registerLoading?
                             <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
                             :
