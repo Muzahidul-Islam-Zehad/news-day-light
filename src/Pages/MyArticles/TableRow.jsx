@@ -1,7 +1,18 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
+import UpdateModal from "./UpdateModal";
 
-const TableRow = ({ article, idx, handleDelete }) => {
+const TableRow = ({ article, idx, handleDelete, refetch }) => {
     const { articleTitle, status, isPremium, _id } = article || {};
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => {
+        setIsModalOpen(false);
+        refetch();
+    }
+
     return (
         <tr className="hover font-medium">
             <th>{idx + 1}</th>
@@ -14,15 +25,24 @@ const TableRow = ({ article, idx, handleDelete }) => {
             <td><span className={`${status === 'Pending' && 'bg-yellow-200 px-4 py-1 rounded-3xl'} ${status === 'Accepted' && 'bg-green-200 px-4 py-1 rounded-3xl'} ${status === 'bg-red-200 px-4 py-1 rounded-3xl'}`}>{status}</span></td>
             <td>{isPremium}</td>
             <td>
-                <button className="btn btn-outline btn-sm btn-accent">
+                <button onClick={openModal} className="btn btn-outline btn-sm btn-accent">
                     Update
                 </button>
             </td>
             <td>
-                <button onClick={()=>handleDelete(_id)} className="btn btn-outline btn-sm btn-error">
+                <button onClick={() => handleDelete(_id)} className="btn btn-outline btn-sm btn-error">
                     Delete
                 </button>
             </td>
+
+            <UpdateModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                article = {article}
+                refetch={refetch}
+            ></UpdateModal>
+
+
         </tr>
     );
 };
@@ -30,6 +50,7 @@ const TableRow = ({ article, idx, handleDelete }) => {
 TableRow.propTypes = {
     article: PropTypes.object.isRequired,
     handleDelete: PropTypes.func.isRequired,
+    refetch: PropTypes.func.isRequired,
     idx: PropTypes.number.isRequired,
 
 }

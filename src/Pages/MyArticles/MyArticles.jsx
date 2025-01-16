@@ -9,6 +9,7 @@ import TableRow from "./TableRow";
 const MyArticles = () => {
 
     const [myArticleData, isLoading, refetch] = useMyArticle();
+    
     const axiosSecure = useAxiosSecure();
 
     console.log(myArticleData);
@@ -48,6 +49,8 @@ const MyArticles = () => {
         });
     }
 
+    
+
     return (
         <div className="w-11/12 mx-auto">
             <div>
@@ -73,7 +76,7 @@ const MyArticles = () => {
                             {
                                 myArticleData.map((article, idx) => {
                                     return (
-                                        <TableRow key={article._id} handleDelete={handleDelete} article={article} idx={idx}></TableRow>
+                                        <TableRow key={article._id} handleDelete={handleDelete} article={article} idx={idx} refetch={refetch}></TableRow>
                                     )
                                 })
                             }
