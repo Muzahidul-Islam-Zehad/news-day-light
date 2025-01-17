@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PageHeading from "../../../Components/SharedComponents/PageHeading";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
 
@@ -15,8 +16,43 @@ const AllUsers = () => {
         }
     });
 
-    if(isLoading)
-    {
+    const handleUpdateToAdmin = async (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const { data } = await axiosSecure.patch(`/make-admin/${id}`);
+                    console.log(data);
+                    Swal.fire({
+                        title: "Changed To Admin!",
+                        text: "User has updated to admin",
+                        icon: "success"
+                    });
+                }
+                catch (err) {
+                    console.log(err);
+                    Swal.fire({
+                        title: "Something Is Wrong",
+                        text: "Couldn't make admin",
+                        icon: "error"
+                    });
+                }
+                finally {
+                    refetch();
+                }
+            }
+        });
+    }
+
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 
@@ -58,13 +94,13 @@ const AllUsers = () => {
                                         </td>
                                         <td className="py-3 px-4">{user.name}</td>
                                         <td className="py-3 px-4">{user.email}</td>
-                                        <td className="py-3 px-4">
+                                        <td className="py-3 px-4 ">
                                             {
                                                 user?.role === 'Admin'
                                                     ?
-                                                    <span>Admin</span>
+                                                    <span className="font-bold  bg-lime-200 py-1 px-3 rounded-xl">Admin</span>
                                                     :
-                                                    <button className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-md px-4 py-2">
+                                                    <button onClick={() => handleUpdateToAdmin(user._id)} className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-md px-4 py-2">
                                                         Make Admin
                                                     </button>
                                             }
