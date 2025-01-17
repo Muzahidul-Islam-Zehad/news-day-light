@@ -72,8 +72,13 @@ const Navbar = () => {
                         user?.email
                             ?
                             <div className="flex items-center justify-between gap-4">
-                                <Link>
-                                    <img referrerPolicy="no-referrer" className="w-12 h-12 rounded-full border-2 object-cover border-yellow-400" src={user?.photoURL} alt="user" />
+                                <Link to={'/user/profile'}>
+                                    {/* <img referrerPolicy="no-referrer" className="w-12 h-12 rounded-full border-2 object-cover border-yellow-400" src={user?.photoURL} alt="user" /> */}
+                                    <div className="avatar">
+                                        <div className="ring-primary ring-offset-base-100 w-12 h-12 rounded-full ring ring-offset-2">
+                                            <img src={user?.photoURL}/>
+                                        </div>
+                                    </div>
                                 </Link>
                                 <button onClick={handleLogOut} className="btn border-none w-20 hover:bg-[#913831] bg-[#ea645b] text-white ">Logout</button>
                             </div>

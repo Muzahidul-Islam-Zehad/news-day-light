@@ -10,6 +10,7 @@ import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ArticleDetails from "../Pages/ArticleDetails/ArticleDetails";
+import UserProfile from "../Pages/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/article-details/:id',
                 element: <ArticleDetails></ArticleDetails>
+            },
+            {
+                path: '/user/profile',
+                element: <UserProfile></UserProfile>
             }
         ]
     },
@@ -57,7 +62,8 @@ const router = createBrowserRouter([
     {
         path:'/registration',
         element: <Register></Register>
-    }
+    },
+    
 ])
 
 export default router;
