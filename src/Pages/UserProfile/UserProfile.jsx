@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState } from "react";
-import UpdateModal from "./UpdateModal";
+import UpdateModal from "./UpdateUserProfileModal";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 const UserProfile = () => {
@@ -51,6 +51,7 @@ const UserProfile = () => {
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 currentUser={data}
+                refetch={refetch}
             />
         </div>
 

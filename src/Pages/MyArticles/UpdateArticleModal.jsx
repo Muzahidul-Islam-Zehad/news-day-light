@@ -9,7 +9,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { BsBrightnessHighFill } from "react-icons/bs";
 
-const UpdateModal = ({ isOpen, onClose, article, refetch }) => {
+const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
     const [photoName, setPhotoName] = useState(null);
     const [change, setChange] = useState(false);
@@ -279,11 +279,11 @@ const UpdateModal = ({ isOpen, onClose, article, refetch }) => {
     );
 };
 
-UpdateModal.propTypes = {
+UpdateArticleModal.propTypes = {
     isOpen: PropTypes.bool,
     onClose: PropTypes.func,
     article: PropTypes.object,
     refetch: PropTypes.func
 }
 
-export default UpdateModal;
+export default UpdateArticleModal;

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import UpdateModal from "./UpdateModal";
+import UpdateModal from "./UpdateArticleModal";
 import { Link } from "react-router-dom";
 
 const TableRow = ({ article, idx, handleDelete, refetch }) => {
