@@ -8,6 +8,8 @@ import { BsBrightnessHighFill } from "react-icons/bs";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 const AddArticles = () => {
     const [photoName, setPhotoName] = useState(null);
@@ -17,6 +19,15 @@ const AddArticles = () => {
     const [articleLoading, setArticleLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+
+
+    const {data : publishers = [] , isLoading} = useQuery({
+        queryKey:['publisher-data'],
+        queryFn: async() =>{
+            const {data} = await axiosSecure.get('/publisher-data');
+            return data;
+        }
+    });
 
 
     // tags options
@@ -105,6 +116,10 @@ const AddArticles = () => {
         // console.log(imageName);
         setPhotoName(imageName);
     }
+    if(isLoading)
+    {
+        return <LoadingSpinner></LoadingSpinner>
+    }
 
     return (
         <div className="bg-[#F4F6F8] py-6">
@@ -155,13 +170,16 @@ const AddArticles = () => {
                         <select
                             id="publisher"
                             name="publisher"
+                            defaultValue=""
                             className="select select-bordered w-full mt-2  focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] bg-[#F9FAFB]"
                             required
                         >
-                            <option value="">Select Publisher</option>
-                            <option value="publisher1">Publisher 1</option>
-                            <option value="publisher2">Publisher 2</option>
-                            <option value="publisher3">Publisher 3</option>
+                            <option disabled value="">Select Publisher</option>
+                            {
+                                publishers.map(publisher => <option key={publisher._id} value={publisher.publisherName}>{publisher.publisherName}</option>)
+                            }
+                            {/* <option value="publisher 2">Publisher 2</option>
+                            <option value="publisher 3">Publisher 3</option> */}
                         </select>
                     </div>
 
