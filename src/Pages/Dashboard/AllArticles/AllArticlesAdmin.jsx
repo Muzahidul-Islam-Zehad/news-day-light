@@ -2,10 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import PageHeading from "../../../Components/SharedComponents/PageHeading";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Components/LoadingSpinner/LoadingSpinner";
-import {format} from "date-fns";
+import { format } from "date-fns";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import DeclineModal from "./DeclineModal/DeclineModal";
 
 const AllArticlesAdmin = () => {
     const axiosSecure = useAxiosSecure();
+    const [loading, setLoading] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [decliningId, setDecliningId] = useState('');
+
+    const handleOpenModal = () => setIsModalOpen(true);
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setDecliningId('');
+    }
 
     const { data: allArticle = [], isLoading, refetch } = useQuery({
         queryKey: ['all-articles'],
@@ -15,9 +27,68 @@ const AllArticlesAdmin = () => {
         }
     })
 
-    if (isLoading) {
+    if (isLoading || loading) {
         return <LoadingSpinner></LoadingSpinner>
     }
+
+    const handleAproveArticle = async (id) => {
+        setLoading(true);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Approve it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axiosSecure.patch(`/update/status/${id}`);
+                    Swal.fire({
+                        title: "Approved",
+                        text: "Article has approved",
+                        icon: "success"
+                    });
+                }
+                catch (err) {
+                    console.log(err);
+                }
+                finally {
+                    refetch();
+                    setLoading(false);
+                }
+            }
+        })
+    }
+
+    const handleDeclineReasonSubmit = async (reason) => {
+        setLoading(true);
+        const decliningReason = { decliningReason: reason };
+
+        console.log(decliningReason);
+
+        try{
+            await axiosSecure.patch(`/article/decline/${decliningId}`, decliningReason);
+            Swal.fire({
+                title: "Declined",
+                text: "The article has declined",
+                icon: "success"
+            });
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
+        finally{
+            refetch();
+            setLoading(false);
+        }
+
+
+    }
+
 
     console.log(allArticle);
     return (
@@ -46,10 +117,10 @@ const AllArticlesAdmin = () => {
                         </thead>
                         {/* Table Body */}
                         <tbody>
-                            {/* Mock Row */}
+                            {/* table Row */}
                             {
                                 allArticle.map((article, idx) => <tr key={article?._id} className="hover:bg-gray-100 border-t">
-                                    <td className="py-3 px-4">{idx+1}</td>
+                                    <td className="py-3 px-4">{idx + 1}</td>
                                     <td className="py-3 px-4">{article?.articleTitle}</td>
                                     <td className="py-3 px-4">
                                         <div className="flex items-center gap-3">
@@ -72,12 +143,13 @@ const AllArticlesAdmin = () => {
                                     </td>
                                     <td className="py-3 px-4">{article.publisher}</td>
                                     <td className="py-3 px-4">
-                                        <button className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1">
+                                        <button disabled={article.status === 'Approved' ||article.status === 'Declined'} onClick={() => handleAproveArticle(article._id)} className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1">
                                             Approve
                                         </button>
                                     </td>
                                     <td className="py-3 px-4">
-                                        <button className="btn btn-md bg-red-500 text-white hover:bg-red-600 rounded-md px-3 py-1">
+                                        <button onClick={() => { handleOpenModal(), setDecliningId(article._id) }} disabled={article.status === 'Approved' ||article.status === 'Declined'}
+                                            className="btn btn-md bg-red-500 text-white hover:bg-red-600 rounded-md px-3 py-1">
                                             Decline
                                         </button>
                                     </td>
@@ -91,7 +163,9 @@ const AllArticlesAdmin = () => {
                                             Make Premium
                                         </button>
                                     </td>
-                                </tr>)
+
+                                </tr>
+                                )
                             }
 
                         </tbody>
@@ -99,6 +173,12 @@ const AllArticlesAdmin = () => {
                 </div>
 
             </div>
+            <DeclineModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onSubmit={handleDeclineReasonSubmit}
+            />
+
         </div>
     );
 };
