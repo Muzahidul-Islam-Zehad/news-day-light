@@ -181,9 +181,11 @@ const AllArticlesAdmin = () => {
                             {
                                 allArticle.map((article, idx) => <tr key={article?._id} className="hover:bg-gray-100 border-t">
                                     <td className="py-3 px-4">{idx + 1}</td>
-                                    <td className="py-3 px-4">{article?.articleTitle}</td>
+                                    <td className="py-3 px-4">{
+                                        article.articleTitle.length > 40 ? article.articleTitle.substring(0,30)+'...' : article.articleTitle
+                                        }</td>
                                     <td className="py-3 px-4">
-                                        <div className="flex items-center gap-3">
+                                        <div className="flex items-center gap-4">
                                             <div className="w-12 h-12 rounded-full overflow-hidden">
                                                 <img
                                                     src={article?.userInfo?.image}

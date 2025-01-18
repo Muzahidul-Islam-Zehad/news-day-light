@@ -17,7 +17,9 @@ const TableRow = ({ article, idx, handleDelete, refetch }) => {
     return (
         <tr className="hover font-medium">
             <th>{idx + 1}</th>
-            <td>{articleTitle}</td>
+            <td>{
+                articleTitle.length > 40 ? articleTitle.substring(0,30)+'...' : articleTitle
+                }</td>
             <td className="">
                 <Link to={`/article-details/${article._id}`}>
                     <button type="button" className="btn btn-outline btn-sm btn-info">
