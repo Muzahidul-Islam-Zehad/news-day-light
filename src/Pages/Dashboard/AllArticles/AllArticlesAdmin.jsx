@@ -69,7 +69,7 @@ const AllArticlesAdmin = () => {
 
         console.log(decliningReason);
 
-        try{
+        try {
             await axiosSecure.patch(`/article/decline/${decliningId}`, decliningReason);
             Swal.fire({
                 title: "Declined",
@@ -77,16 +77,46 @@ const AllArticlesAdmin = () => {
                 icon: "success"
             });
         }
-        catch(err)
-        {
+        catch (err) {
             console.log(err);
         }
-        finally{
+        finally {
             refetch();
             setLoading(false);
         }
 
 
+    }
+
+    const handleMakePremium = async (id) => {
+        setLoading(true);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make it premium!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await axiosSecure.patch(`/make-premium/${id}`);
+                    Swal.fire({
+                        title: "Premium",
+                        text: "Article is premium now",
+                        icon: "success"
+                    });
+                }
+                catch (err) {
+                    console.log(err);
+                }
+                finally {
+                    refetch();
+                    setLoading(false);
+                }
+            }
+        })
     }
 
 
@@ -143,12 +173,12 @@ const AllArticlesAdmin = () => {
                                     </td>
                                     <td className="py-3 px-4">{article.publisher}</td>
                                     <td className="py-3 px-4">
-                                        <button disabled={article.status === 'Approved' ||article.status === 'Declined'} onClick={() => handleAproveArticle(article._id)} className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1">
+                                        <button disabled={article.status === 'Approved' || article.status === 'Declined'} onClick={() => handleAproveArticle(article._id)} className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1">
                                             Approve
                                         </button>
                                     </td>
                                     <td className="py-3 px-4">
-                                        <button onClick={() => { handleOpenModal(), setDecliningId(article._id) }} disabled={article.status === 'Approved' ||article.status === 'Declined'}
+                                        <button onClick={() => { handleOpenModal(), setDecliningId(article._id) }} disabled={article.status === 'Approved' || article.status === 'Declined'}
                                             className="btn btn-md bg-red-500 text-white hover:bg-red-600 rounded-md px-3 py-1">
                                             Decline
                                         </button>
@@ -159,9 +189,16 @@ const AllArticlesAdmin = () => {
                                         </button>
                                     </td>
                                     <td className="py-3 px-4">
-                                        <button className="btn btn-md bg-purple-500 text-white hover:bg-purple-600 rounded-md px-3 py-1">
-                                            Make Premium
-                                        </button>
+                                        {
+                                            article.isPremium === 'Yes'
+                                                ?
+                                                <span>Premium</span>
+                                                :
+
+                                                <button disabled={article.status === 'Declined'} onClick={() => handleMakePremium(article._id)} className="btn btn-md bg-purple-500 text-white hover:bg-purple-600 rounded-md px-3 py-1">
+                                                    Make Premium
+                                                </button>
+                                        }
                                     </td>
 
                                 </tr>
