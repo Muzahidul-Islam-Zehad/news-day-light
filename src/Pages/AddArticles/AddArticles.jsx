@@ -8,8 +8,9 @@ import { BsBrightnessHighFill } from "react-icons/bs";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import useAllPublisher from "../../Hooks/useAllPublisher";
 
 const AddArticles = () => {
     const [photoName, setPhotoName] = useState(null);
@@ -20,14 +21,14 @@ const AddArticles = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
-
-    const {data : publishers = [] , isLoading} = useQuery({
-        queryKey:['publisher-data'],
-        queryFn: async() =>{
-            const {data} = await axiosSecure.get('/publisher-data');
-            return data;
-        }
-    });
+    const [publishers, isLoading] = useAllPublisher();
+    // const {data : publishers = [] , isLoading} = useQuery({
+    //     queryKey:['publisher-data'],
+    //     queryFn: async() =>{
+    //         const {data} = await axiosSecure.get('/publisher-data');
+    //         return data;
+    //     }
+    // });
 
 
     // tags options
@@ -78,11 +79,13 @@ const AddArticles = () => {
 
         const photoURL = await imageUploadToImageBB(image);
 
+        const formatedTags = selectedOptions.map(select => select.value);
+
         const articleInfo = {
             title,
             photoURL,
             publisher,
-            selectedOptions,
+            formatedTags,
             description,
             userInfo: {
                 email: user.email,

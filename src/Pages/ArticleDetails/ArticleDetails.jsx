@@ -46,7 +46,7 @@ const ArticleDetails = () => {
                 <img className="w-full border h-[500px] object-contain bg-slate-100 rounded-xl" src={data?.articleImage} alt="article-image" />
                 <h1 className="uppercase text-4xl font-bold mt-2">{data?.articleTitle}</h1>
                 <h3 className="hover:bg-green-300 cursor-default mt-2 text-xl font-medium bg-green-300 text-blue-600 rounded-full btn btn-sm">Publisher : {data?.publisher}</h3>
-                <p className="mt-6 text-lg">{data?.articleDescription}</p>
+                <p className="mt-6 text-lg ">{data?.articleDescription}</p>
             </div>
         </div>
     );
