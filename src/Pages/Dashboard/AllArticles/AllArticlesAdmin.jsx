@@ -119,6 +119,36 @@ const AllArticlesAdmin = () => {
         })
     }
 
+    const handleDelete = async (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+
+                try {
+                    await axiosSecure.delete(`/my-articles/${id}`);
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Article has been deleted.",
+                        icon: "success"
+                    });
+                }
+                catch (err) {
+                    console.log(err);
+                }
+
+            }
+        });
+    }
+
 
     console.log(allArticle);
     return (
@@ -184,7 +214,7 @@ const AllArticlesAdmin = () => {
                                         </button>
                                     </td>
                                     <td className="py-3 px-4">
-                                        <button className="btn btn-md bg-blue-500 text-white hover:bg-blue-600 rounded-md px-3 py-1">
+                                        <button onClick={() => handleDelete(article._id)} className="btn btn-md bg-blue-500 text-white hover:bg-blue-600 rounded-md px-3 py-1">
                                             Delete
                                         </button>
                                     </td>
