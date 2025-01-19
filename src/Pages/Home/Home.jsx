@@ -8,11 +8,21 @@ import { Link } from "react-router-dom";
 import useAllPublisher from "../../Hooks/useAllPublisher";
 import PublisherCard from "../../Components/PublisherCard/PublisherCard";
 import CountUp from "react-countup";
+import { useEffect, useState } from "react";
 
 const Home = () => {
     const axiosPublic = useAxiosPublic();
 
     const [publishers] = useAllPublisher();
+    const [showModal, setShowModal] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowModal(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const { data: trendingArticles = [], isLoading } = useQuery({
         queryKey: ['trending-article'],
@@ -175,7 +185,31 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-
+                {showModal &&
+                    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+                        <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                            <h2 className="text-2xl font-bold mb-4 text-center">Subscribe Now</h2>
+                            <p className="text-gray-600 text-center mb-6">
+                                Enjoy premium benefits by subscribing to our service!
+                            </p>
+                            <div className="flex justify-center gap-6">
+                                <button
+                                    className="btn btn-sm"
+                                    onClick={() => setShowModal(false)}
+                                >
+                                    Close
+                                </button>
+                                <Link to={'/subscription'}>
+                                    <button
+                                        className="btn btn-sm btn-primary"
+                                    >
+                                        Subscribe
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                }
             </section>
         </div>
     );
