@@ -11,17 +11,17 @@ export const AuthContextProvider = createContext();
 
 
 const AuthProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const axiosPublic = useAxiosPublic();
     const [subscribed, setSubscribed] = useState(false);
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
+            
             if (currentUser) {
+                // setLoading(true);
                 setUser(currentUser);
-
-
                 const userInfo = {email : currentUser.email}
                 const {data} = await axiosPublic.post('/jwt', userInfo);
 
@@ -43,8 +43,7 @@ const AuthProvider = ({ children }) => {
                         setSubscribed(true);
                     }
                 })
-
-
+                
                 setLoading(false);
             }
             else {
@@ -57,7 +56,7 @@ const AuthProvider = ({ children }) => {
         return () => unSubscribe();
     }, []);
 
-    console.log('current user ---->', user);
+    console.log('current user ---->', user, loading);
 
     const googleLogin = () => {
         setLoading(true);

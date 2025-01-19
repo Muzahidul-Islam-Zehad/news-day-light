@@ -16,6 +16,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllArticlesAdmin from "../Pages/Dashboard/AllArticles/AllArticlesAdmin";
 import AddPublisher from "../Pages/Dashboard/AddPublisher/AddPublisher";
 import Payment from "../Pages/Payment/Payment";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/add-articles',
-                element:<AddArticles></AddArticles>
+                element:<PrivateRoute><AddArticles></AddArticles></PrivateRoute>
             },
             {
                 path:'/all-articles',
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path:'/subscription',
-                element: <Subscription></Subscription>
+                element: <PrivateRoute><Subscription></Subscription></PrivateRoute>
             },
             {
                 path: '/dashboard',
@@ -62,19 +63,19 @@ const router = createBrowserRouter([
             },
             {
                 path:'/my-articles',
-                element: <MyArticles></MyArticles>
+                element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>
             },
             {
                 path: '/premium-articles',
-                element:<PremiumArticles></PremiumArticles>
+                element:<PrivateRoute><PremiumArticles></PremiumArticles></PrivateRoute>
             },
             {
                 path: '/article-details/:id',
-                element: <ArticleDetails></ArticleDetails>
+                element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>
             },
             {
                 path: '/user/profile',
-                element: <UserProfile></UserProfile>
+                element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
             }
         ]
     },
@@ -88,7 +89,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/payment',
-        element: <Payment></Payment>
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>
     }
     
 ])

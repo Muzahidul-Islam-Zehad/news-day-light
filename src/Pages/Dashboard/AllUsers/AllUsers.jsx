@@ -100,7 +100,7 @@ const AllUsers = () => {
                                                     ?
                                                     <span className="font-bold  bg-lime-200 py-1 px-3 rounded-xl">Admin</span>
                                                     :
-                                                    <button onClick={() => handleUpdateToAdmin(user._id)} className="btn btn-sm bg-blue-500 text-white hover:bg-blue-600 rounded-md px-4 py-2">
+                                                    <button onClick={() => handleUpdateToAdmin(user._id)} className="btn btn-md bg-blue-500 text-white hover:bg-blue-600 rounded-md px-4 py-2">
                                                         Make Admin
                                                     </button>
                                             }

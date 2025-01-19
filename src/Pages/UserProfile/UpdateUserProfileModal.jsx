@@ -13,7 +13,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
     const [updateLoading, setUpdateLoading] = useState(false);
     const fileRef = useRef(null);
     const axiosSecure = useAxiosSecure();
-    const { user,updateUserProfile } = useAuth();
+    const { user,updateUserProfile, setLoading } = useAuth();
 
     useEffect(() => {
         if (!isOpen) {
@@ -62,6 +62,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
             await axiosSecure.patch(`/users/${user.email}`, updatedData);
 
             await updateUserProfile(updatedData);
+            setLoading(false);
 
             Swal.fire({
                 title: "Updated",
