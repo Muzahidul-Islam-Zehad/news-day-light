@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../FirebaseConfig/firebaseConfig";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 
 
@@ -12,21 +12,31 @@ export const AuthContextProvider = createContext();
 
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState([]);
-    const axiosSecure = useAxiosSecure();
+    const [user, setUser] = useState(null);
+    const axiosPublic = useAxiosPublic();
     const [subscribed, setSubscribed] = useState(false);
 
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
 
-                axiosSecure.get(`/isPremium?email=${currentUser.email}`)
+
+                const userInfo = {email : currentUser.email}
+                const {data} = await axiosPublic.post('/jwt', userInfo);
+
+                if(data?.token)
+                {
+                    localStorage.setItem('token', data?.token);
+                }
+                
+
+                axiosPublic.get(`/isPremium?email=${currentUser.email}`)
                 .then(res =>{
                     if(res.data === false)
                     {
                         // logoutUser();
-                        axiosSecure.patch('/remove/subscription', {email : currentUser.email});
+                        axiosPublic.patch('/remove/subscription', {email : currentUser.email});
                         setSubscribed(false);
                     }
                     else{
@@ -38,13 +48,15 @@ const AuthProvider = ({ children }) => {
                 setLoading(false);
             }
             else {
+                localStorage.removeItem('token');
                 setUser([]);
                 setLoading(false);
             }
         })
 
         return () => unSubscribe();
-    }, [])
+    }, []);
+
     console.log('current user ---->', user);
 
     const googleLogin = () => {

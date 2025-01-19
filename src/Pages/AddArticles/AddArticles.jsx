@@ -49,7 +49,7 @@ const AddArticles = () => {
         { value: 'culture', label: 'Culture' },
         { value: 'environment', label: 'Environment' },
     ];
-    
+
 
 
     // tags selection
@@ -94,17 +94,26 @@ const AddArticles = () => {
             }
         }
 
-        try{
-            await axiosSecure.post('/articles', articleInfo);
-            Swal.fire({
-                title: "Submited",
-                text: "Your article has been submited",
-                icon: "success"
-              });
-              navigate('/my-articles')
+        try {
+            const { data } = await axiosSecure.post(`/articles?email=${user.email}`, articleInfo);
+            if (data?.message === 'needPremium') {
+                Swal.fire({
+                    title: "Need Premium",
+                    text: "You have reached maximum post of free plan",
+                    icon: "error"
+                });
+            }
+            else {
+                Swal.fire({
+                    title: "Submited",
+                    text: "Your article has been submited",
+                    icon: "success"
+                });
+                navigate('/my-articles')
+            }
+
         }
-        catch(err)
-        {
+        catch (err) {
             console.log(err);
         }
 
@@ -119,8 +128,7 @@ const AddArticles = () => {
         // console.log(imageName);
         setPhotoName(imageName);
     }
-    if(isLoading)
-    {
+    if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
 

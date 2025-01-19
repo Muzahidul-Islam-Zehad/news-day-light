@@ -9,10 +9,10 @@ const useMyArticle = () => {
     const axiosSecure = useAxiosSecure();
 
     const {data : myArticleData , isLoading, refetch } = useQuery({
-        queryKey : ['my-articles', user.email],
-        enabled: !!user.email,
+        queryKey : ['my-articles', user?.email],
+        enabled: !!user?.email,
         queryFn : async() =>{
-            const response = await axiosSecure.get(`/articles/${user.email}`);
+            const response = await axiosSecure.get(`/articles/${user?.email}`);
             return response.data;
         }
     });
