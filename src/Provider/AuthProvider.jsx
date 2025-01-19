@@ -26,7 +26,7 @@ const AuthProvider = ({ children }) => {
                     if(res.data === false)
                     {
                         // logoutUser();
-                        axiosSecure.patch('/remove/subscription', currentUser.email);
+                        axiosSecure.patch('/remove/subscription', {email : currentUser.email});
                         setSubscribed(false);
                     }
                     else{
