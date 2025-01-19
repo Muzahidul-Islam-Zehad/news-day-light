@@ -15,6 +15,7 @@ import Statistics from "../Pages/Dashboard/Statistics/Statistics";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllArticlesAdmin from "../Pages/Dashboard/AllArticles/AllArticlesAdmin";
 import AddPublisher from "../Pages/Dashboard/AddPublisher/AddPublisher";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
         path:'/registration',
         element: <Register></Register>
     },
+    {
+        path: '/payment',
+        element: <Payment></Payment>
+    }
     
 ])
 
