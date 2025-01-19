@@ -93,23 +93,90 @@ const Home = () => {
                     <div className="stat place-items-center">
                         <div className="stat-title">Total User</div>
                         <div className="stat-value">
-                            <CountUp end={usersCount?.allUserCount} duration={5}/>
+                            <CountUp end={usersCount?.allUserCount} duration={5} />
                         </div>
                     </div>
                     <div className="stat place-items-center">
                         <div className="stat-title">Normal User</div>
                         <div className="stat-value">
-                            <CountUp end={usersCount?.normalUsersCount} duration={5}/>
+                            <CountUp end={usersCount?.normalUsersCount} duration={5} />
                         </div>
                     </div>
                     <div className="stat place-items-center">
                         <div className="stat-title">Premium User</div>
                         <div className="stat-value">
-                            <CountUp end={usersCount?.premiumUsersCount} duration={5}/>
+                            <CountUp end={usersCount?.premiumUsersCount} duration={5} />
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* show plan cards */}
+            <section>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-11/12 mx-auto mt-10">
+                    {/* Free Plan Card */}
+                    <div className="card bg-gray-100 shadow-lg border border-gray-300 p-6 rounded-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Free Plan</h2>
+                            <p className="text-gray-600 text-center mb-4">Perfect for beginners</p>
+                            <ul className="list-disc list-inside text-gray-700 space-y-2">
+                                <li>Can post 1 article</li>
+                                <li>Can&apos;t visit premium articles</li>
+                            </ul>
+                        </div>
+                        <div className="mt-6 text-center">
+                            <span className="block text-3xl font-bold text-gray-800 mb-2">Free</span>
+                            {/* <button
+                                className="btn bg-gray-300 text-gray-700 cursor-not-allowed font-semibold py-2 px-6 rounded-lg"
+                                disabled
+                            >
+                                Current Plan
+                            </button> */}
+                        </div>
+                    </div>
+
+                    {/* Monthly Plan Card */}
+                    <div className="card bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg border border-indigo-400 p-6 rounded-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-2xl font-bold mb-4 text-center">Monthly Plan</h2>
+                            <p className="text-white/90 text-center mb-4">Ideal for regular users</p>
+                            <ul className="list-disc list-inside space-y-2">
+                                <li>Unlimited article posts</li>
+                                <li>Access premium articles</li>
+                                <li>Cancel anytime</li>
+                            </ul>
+                        </div>
+                        <div className="mt-6 text-center">
+                            <span className="block text-3xl font-bold mb-2">$10</span>
+                            <span className="text-sm block mb-4">per month</span>
+                            <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Yearly Plan Card */}
+                    <div className="card bg-gradient-to-r from-green-500 to-teal-600 text-white shadow-lg border border-teal-400 p-6 rounded-lg hover:shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-2xl font-bold mb-4 text-center">Yearly Plan</h2>
+                            <p className="text-white/90 text-center mb-4">Best value for money</p>
+                            <ul className="list-disc list-inside space-y-2">
+                                <li>Unlimited article posts</li>
+                                <li>Access premium articles</li>
+                                <li>2 months free</li>
+                            </ul>
+                        </div>
+                        <div className="mt-6 text-center">
+                            <span className="block text-3xl font-bold mb-2">$100</span>
+                            <span className="text-sm block mb-4">per year</span>
+                            <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
         </div>
     );
 };
