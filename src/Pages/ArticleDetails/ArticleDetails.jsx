@@ -40,15 +40,22 @@ const ArticleDetails = () => {
     return (
         <div className="w-11/12 md:w-5/6 lg:w-3/5 mx-auto my-6">
             <div>
-                <PageHeading></PageHeading>
+                <PageHeading />
             </div>
-            <div className="p-4 border border-slate-300 rounded-2xl">
-                <img className="w-full border h-[500px] object-contain bg-slate-100 rounded-xl" src={data?.articleImage} alt="article-image" />
-                <h1 className="uppercase text-4xl font-bold mt-2">{data?.articleTitle}</h1>
-                <h3 className="hover:bg-green-300 cursor-default mt-2 text-xl font-medium bg-green-300 text-blue-600 rounded-full btn btn-sm">Publisher : {data?.publisher}</h3>
-                <p className="mt-6 text-lg ">{data?.articleDescription}</p>
+            <div className="p-6 border border-gray-300 rounded-3xl shadow-lg bg-white">
+                <img
+                    className="w-full h-[500px] object-cover bg-slate-100 rounded-xl shadow-md"
+                    src={data?.articleImage}
+                    alt="article-image"
+                />
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mt-4 text-gray-800">{data?.articleTitle}</h1>
+                <h3 className="mt-4 text-lg sm:text-xl font-medium text-white bg-gradient-to-r from-green-400 to-blue-500 px-4 py-2 rounded-full w-max">
+                    Publisher: {data?.publisher}
+                </h3>
+                <p className="mt-6 text-lg sm:text-xl text-gray-600 leading-relaxed">{data?.articleDescription}</p>
             </div>
         </div>
+
     );
 };
 

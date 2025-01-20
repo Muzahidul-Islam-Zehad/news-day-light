@@ -29,7 +29,7 @@ const Register = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setErrMsg('');
-        setRegisterLoading(true);
+        
 
         const form = e.target;
         const name = form.name.value;
@@ -38,9 +38,11 @@ const Register = () => {
         const password = form.password.value;
 
         if (!name || !email || !image || !password) {
-            setErrMsg('(*) marked fields are required')
+            setErrMsg('(*) marked fields are required');
             return;
         }
+
+        setRegisterLoading(true);
 
         const lowerCaseRegEx = /[a-z]/;
         const upperCaseRegEx = /[A-Z]/;
@@ -102,9 +104,13 @@ const Register = () => {
             navigate('/');
         }
         catch (err) {
+            toast.error('Registration Failed' , {
+                duration: 1000,
+            })
             console.log(err);
         }
         finally {
+            form.reset()
             setLoading(false);
             setRegisterLoading(false);
         }

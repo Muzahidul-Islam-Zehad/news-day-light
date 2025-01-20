@@ -19,6 +19,7 @@ import Payment from "../Pages/Payment/Payment";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SubscribedRoute from "./SubscribedRoute/SubscribedRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
     {
         path: '/payment',
         element: <PrivateRoute><Payment></Payment></PrivateRoute>
+    },
+    {
+        path : "*",
+        element: <ErrorPage></ErrorPage>
     }
     
 ])

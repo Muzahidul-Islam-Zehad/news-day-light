@@ -66,18 +66,16 @@ const Home = () => {
                             key={ta._id}
                             className="relative h-[250px] md:h-[350px] lg:h-[450px] bg-black text-white"
                         >
-                            <Link to={`/article-details/${ta._id}`}>
-                                <img
-                                    src={ta.articleImage}
-                                    alt={ta.articleTitle}
-                                    className="w-full h-full object-cover"
-                                />
-                                <div className="absolute bottom-0 bg-gradient-to-t from-black via-transparent to-transparent w-full p-4">
-                                    <h3 className=" legend text-lg md:text-xl lg:text-2xl font-bold">
-                                        {ta.articleTitle}
-                                    </h3>
-                                </div>
-                            </Link>
+                            <img
+                                src={ta.articleImage}
+                                alt={ta.articleTitle}
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute bottom-0 bg-gradient-to-t from-black via-transparent to-transparent w-full p-4">
+                                <h3 className=" legend text-lg md:text-xl lg:text-2xl font-bold">
+                                    {ta.articleTitle}
+                                </h3>
+                            </div>
                         </div>
                     ))}
                 </Carousel>
@@ -98,31 +96,39 @@ const Home = () => {
             </section>
 
             {/* total user show  */}
-            <div className="flex justify-center mt-10">
-                <div className="stats shadow">
-                    <div className="stat place-items-center">
-                        <div className="stat-title">Total User</div>
-                        <div className="stat-value">
-                            <CountUp end={usersCount?.allUserCount} duration={5} />
+            <section>
+                <div className="mt-10 mb-4">
+                    <PageHeading title={'total users'} subtitle='The users who are connected'></PageHeading>
+                </div>
+                <div className="flex justify-center mt-10">
+                    <div className="stats shadow">
+                        <div className="stat place-items-center">
+                            <div className="stat-title">Total User</div>
+                            <div className="stat-value">
+                                <CountUp end={usersCount?.allUserCount} duration={5} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="stat place-items-center">
-                        <div className="stat-title">Normal User</div>
-                        <div className="stat-value">
-                            <CountUp end={usersCount?.normalUsersCount} duration={5} />
+                        <div className="stat place-items-center">
+                            <div className="stat-title">Normal User</div>
+                            <div className="stat-value">
+                                <CountUp end={usersCount?.normalUsersCount} duration={5} />
+                            </div>
                         </div>
-                    </div>
-                    <div className="stat place-items-center">
-                        <div className="stat-title">Premium User</div>
-                        <div className="stat-value">
-                            <CountUp end={usersCount?.premiumUsersCount} duration={5} />
+                        <div className="stat place-items-center">
+                            <div className="stat-title">Premium User</div>
+                            <div className="stat-value">
+                                <CountUp end={usersCount?.premiumUsersCount} duration={5} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             {/* show plan cards */}
             <section>
+                <div className="mt-10 mb-4">
+                    <PageHeading title={'Our Plans'} subtitle='Be premium to get premium'></PageHeading>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-11/12 mx-auto mt-10">
                     {/* Free Plan Card */}
                     <div className="card bg-gray-100 shadow-lg border border-gray-300 p-6 rounded-lg hover:shadow-xl transition flex flex-col justify-between">
@@ -214,6 +220,183 @@ const Home = () => {
                         </div>
                     </div>
                 }
+            </section>
+
+            {/* how to make Proper Article */}
+            <section>
+                <div className="mt-10 mb-4">
+                    <PageHeading title={'make professional article'} subtitle='How to make articles like pro'></PageHeading>
+                </div>
+                <div>
+                    <div className="flex justify-center p-6 bg-gray-100 w-full">
+                        <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-4xl">
+                            {/* Header */}
+                            <div className="bg-gradient-to-r from-blue-500 to-blue-700 text-white p-4">
+                                <h2 className="text-2xl font-bold">Writing Professional Articles</h2>
+                                <p className="mt-1 text-sm">
+                                    Master the art of crafting engaging and impactful content.
+                                </p>
+                            </div>
+
+                            {/* Content */}
+                            <div className="p-6 space-y-4">
+                                <div className="flex items-start gap-3">
+                                    <span className="text-blue-500 text-lg font-bold">1.</span>
+                                    <div>
+                                        <h3 className="font-semibold text-lg">Choose a Relevant Topic</h3>
+                                        <p className="text-gray-600 text-sm">
+                                            Understand your audience and select topics that resonate with their interests and needs. Use analytics tools to identify trends.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="text-blue-500 text-lg font-bold">2.</span>
+                                    <div>
+                                        <h3 className="font-semibold text-lg">Write a Catchy Headline</h3>
+                                        <p className="text-gray-600 text-sm">
+                                            The headline is the first impression. Use strong keywords and keep it concise to grab attention.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="text-blue-500 text-lg font-bold">3.</span>
+                                    <div>
+                                        <h3 className="font-semibold text-lg">Engage with an Introduction</h3>
+                                        <p className="text-gray-600 text-sm">
+                                            Start with a hook—an interesting fact, question, or anecdote—to draw readers in and set the tone.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="text-blue-500 text-lg font-bold">4.</span>
+                                    <div>
+                                        <h3 className="font-semibold text-lg">Structure Your Content</h3>
+                                        <p className="text-gray-600 text-sm">
+                                            Use headings, subheadings, and bullet points to make the content easy to scan. Break up large blocks of text.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-3">
+                                    <span className="text-blue-500 text-lg font-bold">5.</span>
+                                    <div>
+                                        <h3 className="font-semibold text-lg">Proofread and Edit</h3>
+                                        <p className="text-gray-600 text-sm">
+                                            Ensure the content is free of grammatical errors and flows naturally. Editing improves readability and professionalism.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Footer */}
+                            <div className="bg-gray-50 px-6 py-4 text-center">
+                                <button className="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ section */}
+            <section>
+                <div className="mt-10 mb-4">
+                    <PageHeading title={'faq'} subtitle='Explore your unknown questions'></PageHeading>
+                </div>
+                <div>
+                    <div className="bg-gray-100 py-12 px-6 lg:px-16">
+                        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-8">
+                            {/* Left: Image */}
+                            <div className="lg:w-1/2">
+                                <img
+                                    src="https://i.ibb.co.com/f8tqx75/Faq.jpg"
+                                    alt="FAQ Illustration"
+                                    className="rounded-lg shadow-lg w-full"
+                                />
+                            </div>
+
+                            {/* Right: Accordion */}
+                            <div className="lg:w-1/2">
+                                <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                                    Frequently Asked Questions
+                                </h2>
+                                <div className="space-y-4">
+                                    {/* Accordion Item 1 */}
+                                    <div
+                                        tabIndex={0}
+                                        className="collapse collapse-arrow border border-base-300 bg-white rounded-lg"
+                                    >
+                                        <div className="collapse-title text-lg font-medium">
+                                            How can I access premium articles?
+                                        </div>
+                                        <div className="collapse-content">
+                                            <p>
+                                                To access premium articles, you need to subscribe to our
+                                                premium plan. Once subscribed, premium articles will be
+                                                unlocked for your account.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Accordion Item 2 */}
+                                    <div
+                                        tabIndex={0}
+                                        className="collapse collapse-arrow border border-base-300 bg-white rounded-lg"
+                                    >
+                                        <div className="collapse-title text-lg font-medium">
+                                            What is included in the premium subscription?
+                                        </div>
+                                        <div className="collapse-content">
+                                            <p>
+                                                The premium subscription includes access to exclusive articles,
+                                                ad-free browsing, and early access to trending content. You
+                                                will also receive personalized recommendations.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Accordion Item 3 */}
+                                    <div
+                                        tabIndex={0}
+                                        className="collapse collapse-arrow border border-base-300 bg-white rounded-lg"
+                                    >
+                                        <div className="collapse-title text-lg font-medium">
+                                            How can I become a publisher?
+                                        </div>
+                                        <div className="collapse-content">
+                                            <p>
+                                                To become a publisher, sign up and contact our admin team
+                                                through your dashboard. Once approved, you can start
+                                                publishing articles.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Accordion Item 4 */}
+                                    <div
+                                        tabIndex={0}
+                                        className="collapse collapse-arrow border border-base-300 bg-white rounded-lg"
+                                    >
+                                        <div className="collapse-title text-lg font-medium">
+                                            How do I report an issue with an article?
+                                        </div>
+                                        <div className="collapse-content">
+                                            <p>
+                                                If you encounter any issues with an article, click the
+                                                Report button below the article or contact our support team
+                                                with the details of the issue.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
     );

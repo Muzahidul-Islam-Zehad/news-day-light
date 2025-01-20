@@ -45,12 +45,12 @@ const TableRow = ({ article, idx, handleDelete, refetch }) => {
                 <span
                     className={`${status === 'Pending' && 'bg-yellow-200 px-4 py-1 rounded-3xl'} ${status === 'Accepted' && 'bg-green-200 px-4 py-1 rounded-3xl'
                         } ${status === 'Declined' &&
-                        'bg-red-200 px-4 py-1 rounded-3xl cursor-pointer'
-                        }`}
-                    onClick={status === 'Declined' ? handleSeeDeclineReason : null}
+                        'bg-red-200 px-4 py-1 rounded-3xl'
+                        } ${status === 'Approved' && 'bg-lime-200 px-4 py-1 rounded-3xl'}`}
                 >
-                    {status}
+                    <span>{status}</span>
                 </span>
+                {status === 'Declined' && <button onClick={handleSeeDeclineReason} className="btn btn-xs ml-4">see reason</button>}
             </td>
             <td>{isPremium}</td>
             <td>

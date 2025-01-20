@@ -13,8 +13,8 @@ const AllArticlesAdmin = () => {
     const [loading, setLoading] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [decliningId, setDecliningId] = useState('');
-    const [currentPage, setCurrentPage] = useState(0); // Current page (1-based)
-    const [limit, setLimit] = useState(3); // Items per pageF
+    const [currentPage, setCurrentPage] = useState(0); 
+    const [limit, setLimit] = useState(5); 
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => {
@@ -31,7 +31,7 @@ const AllArticlesAdmin = () => {
     })
 
     const handlePageClick = (event) => {
-        setCurrentPage(event.selected); // Update the current page (0-based)
+        setCurrentPage(event.selected);
     };
 
     // if (isLoading || loading) {
@@ -124,6 +124,7 @@ const AllArticlesAdmin = () => {
                 }
             }
         })
+        setLoading(false);
     }
 
     const handleDelete = async (id) => {
@@ -210,7 +211,10 @@ const AllArticlesAdmin = () => {
                                             <td className="py-3 px-4">{article?.userInfo?.email}</td>
                                             <td className="py-3 px-4">{format(new Date(article?.createdAt), 'PPPP')}</td>
                                             <td className="py-3 px-4">
-                                                <span className="px-3 py-1 text-white rounded-md bg-yellow-500">
+                                                <span className={`${status === 'Pending' && 'bg-yellow-200 px-4 py-1 rounded-3xl'} ${article?.status === 'Accepted' && 'bg-green-200 px-4 py-1 rounded-3xl'
+                                                    } ${article?.status === 'Declined' &&
+                                                    'bg-red-200 px-4 py-1 rounded-3xl cursor-pointer'
+                                                    } ${article?.status === 'Approved' && 'bg-lime-200 px-4 py-1 rounded-3xl'}`}>
                                                     {article?.status}
                                                 </span>
                                             </td>
@@ -278,7 +282,7 @@ const AllArticlesAdmin = () => {
                     />
                     <div className="flex  gap-4">
                         <p>Select Limit : </p>
-                        <select value={limit} onChange={((e) => {setLimit(e.target.value),setCurrentPage(0)})} className="select select-bordered w-full max-w-xs">
+                        <select value={limit} onChange={((e) => { setLimit(e.target.value), setCurrentPage(0) })} className="select select-bordered w-full max-w-xs">
                             <option value={3}>3</option>
                             <option value={5}>5</option>
                             <option value={10}>10</option>

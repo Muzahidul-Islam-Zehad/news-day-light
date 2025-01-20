@@ -9,8 +9,8 @@ import { useState } from "react";
 const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
-    const [currentPage, setCurrentPage] = useState(0); // Current page (1-based)
-    const [limit, setLimit] = useState(3); // Items per pageF
+    const [currentPage, setCurrentPage] = useState(0);
+    const [limit, setLimit] = useState(5); 
 
     const { data: allUsers = [], isLoading, refetch } = useQuery({
         queryKey: ['all-users', currentPage, limit],
@@ -21,7 +21,7 @@ const AllUsers = () => {
     });
 
     const handlePageClick = (event) => {
-        setCurrentPage(event.selected); // Update the current page (0-based)
+        setCurrentPage(event.selected); 
     };
 
 

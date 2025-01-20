@@ -1,4 +1,5 @@
 import { Link, useLocation, Outlet } from "react-router-dom";
+import { IoIosMenu } from "react-icons/io";
 
 const Dashboard = () => {
     const { pathname } = useLocation();
@@ -10,7 +11,7 @@ const Dashboard = () => {
                 <div className="drawer-content">
                     {/* Page content here */}
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">
-                        Open Menu
+                        <span className="text-2xl text-white"><IoIosMenu /></span>
                     </label>
 
                     {/* Outlet Content */}
