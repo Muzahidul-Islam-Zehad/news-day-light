@@ -159,9 +159,11 @@ const Home = () => {
                         <div className="mt-6 text-center">
                             <span className="block text-3xl font-bold mb-2">$10</span>
                             <span className="text-sm block mb-4">per month</span>
-                            <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
-                                Buy Now
-                            </button>
+                            <Link to={'/subscription'}>
+                                <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
+                                    Buy Now
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -179,9 +181,11 @@ const Home = () => {
                         <div className="mt-6 text-center">
                             <span className="block text-3xl font-bold mb-2">$100</span>
                             <span className="text-sm block mb-4">per year</span>
-                            <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
-                                Buy Now
-                            </button>
+                            <Link to={'/subscription'}>
+                                <button className="btn bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-6 rounded-lg">
+                                    Buy Now
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
