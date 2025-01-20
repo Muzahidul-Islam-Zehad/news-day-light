@@ -66,7 +66,7 @@ const AllUsers = () => {
     //     return <LoadingSpinner></LoadingSpinner>
     // }
 
-    console.log(allUsers.users);
+    // console.log(allUsers.users);
 
     return (
         <div>
@@ -140,7 +140,7 @@ const AllUsers = () => {
                         previousLabel={"Previous"}
                         nextLabel={"Next"}
                         breakLabel={"..."}
-                        pageCount={allUsers.totalPages}
+                        pageCount={allUsers?.totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
                         onPageChange={handlePageClick} // Handle page click
@@ -159,7 +159,7 @@ const AllUsers = () => {
                     />
                     <div className="flex  gap-4">
                         <p>Select Limit : </p>
-                        <select value={limit} onChange={((e) => setLimit(e.target.value))} className="select select-bordered w-full max-w-xs">
+                        <select value={limit} onChange={((e) => {setLimit(e.target.value),setCurrentPage(0)})} className="select select-bordered w-full max-w-xs">
                             <option value={3}>3</option>
                             <option value={5}>5</option>
                             <option value={10}>10</option>

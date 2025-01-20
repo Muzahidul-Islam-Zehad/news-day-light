@@ -8,26 +8,52 @@ import { imageUploadToImageBB } from "../../Utilities/UploadImageOnImageBB";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { BsBrightnessHighFill } from "react-icons/bs";
+import useAllPublisher from "../../Hooks/useAllPublisher";
+import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
     const [photoName, setPhotoName] = useState(null);
     const [change, setChange] = useState(false);
-    const [selectedOptions, setSelectedOptions] = useState(article.Tags || []);
+    const [selectedOptions, setSelectedOptions] = useState([]);
     const fileInputRef = useRef(null);
     const axiosSecure = useAxiosSecure();
     const [articleLoading, setArticleLoading] = useState(false);
+    const [publishers, isLoading] = useAllPublisher();
+    const [modifiedTagss, setModifiedTagss] = useState([]);
 
     useEffect(() => {
+
+        // if (article) {
+        // }
+        const modifiedTags = Array.isArray(article?.Tags)
+        ? article.Tags.map(tag => ({
+            value: tag,
+            label: tag,
+        }))
+        : [];
+        console.log(modifiedTags);
+        setModifiedTagss(modifiedTags);
+
+
         if (!isOpen) {
-            setSelectedOptions(article.Tags || []);
+            setSelectedOptions(modifiedTags || []);
             setChange(false);
 
         }
+
+
+
     }, [isOpen, article]);
 
     if (!isOpen) return null;
 
+    //tags in array conversion.
+
+    if(isLoading)
+    {
+        return <LoadingSpinner></LoadingSpinner>
+    }
     // tags options
     const options = [
         { value: 'technology', label: 'Technology' },
@@ -94,7 +120,10 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
             }
         }
 
-        const updatedArticle = { title, publisher, description, selectedOptions, photoURL };
+        const formatedTags = selectedOptions.map(select => select.value);
+        console.log('fomatedTags' ,formatedTags);
+
+        const updatedArticle = { title, publisher, description, formatedTags, photoURL };
 
         try {
             await axiosSecure.patch(`/my-articles/update/${id}`, updatedArticle);
@@ -164,9 +193,9 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                     required
                                 >
                                     <option value="">Select Publisher</option>
-                                    <option value="publisher1">Publisher 1</option>
-                                    <option value="publisher2">Publisher 2</option>
-                                    <option value="publisher3">Publisher 3</option>
+                                    {
+                                        publishers.map(publisher => <option key={publisher._id} value={publisher.publisherName}>{publisher.publisherName}</option>)
+                                    }
                                 </select>
                             </div>
 
@@ -179,7 +208,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                     options={options}
                                     name="tags"
                                     isMulti
-                                    // defaultValue={article.Tags}
+                                    defaultValue={modifiedTagss.map(tag => tag)}
                                     value={selectedOptions}
                                     onChange={handleTagChange}
                                     placeholder="Select tags..."
