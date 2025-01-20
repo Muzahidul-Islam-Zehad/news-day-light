@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
 
 const SubscribedRoute = ({ children }) => {
-    const { subscribed , loading, user, subscriptionLoading } = useAuth();
+    const { subscribed, isAdmin , loading, user, subscriptionLoading } = useAuth();
 
     if(loading || subscriptionLoading)
     {
@@ -13,7 +13,7 @@ const SubscribedRoute = ({ children }) => {
 
     if(user?.email)
     {
-        if(subscribed)
+        if(subscribed || isAdmin)
         {
             return children;
         }
