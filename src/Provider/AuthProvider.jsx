@@ -9,13 +9,14 @@ import useAxiosPublic from "../Hooks/useAxiosPublic";
 export const AuthContextProvider = createContext();
 
 
-
 const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const axiosPublic = useAxiosPublic();
     const [subscribed, setSubscribed] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [subscriptionLoading, setSubscriptionLoading] = useState(true);
+    const [adminLoading, setAdminLoading] = useState(true);
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
@@ -30,8 +31,13 @@ const AuthProvider = ({ children }) => {
                 {
                     localStorage.setItem('token', data?.token);
                 }
-                
 
+                //check isAdmin
+                const {data : isadmin} = await axiosPublic.get(`/check/isAdmin?email=${currentUser.email}`);
+                setIsAdmin(isadmin?.isAdmin);
+                // console.log('isAdmin', isadmin);
+                
+                //check isSubscribed
                 axiosPublic.get(`/isPremium?email=${currentUser.email}`)
                 .then(async(res) =>{
                     if((res.data) === false)
@@ -46,21 +52,22 @@ const AuthProvider = ({ children }) => {
                         setSubscriptionLoading(false);
                     }
                 })
-                
+                setAdminLoading(false);
                 setLoading(false);
             }
             else {
                 localStorage.removeItem('token');
                 setUser([]);
                 setLoading(false);
-                setSubscriptionLoading(false)
+                setSubscriptionLoading(false);
+                setAdminLoading(false)
             }
         })
 
         return () => unSubscribe();
     }, [subscribed]);
 
-    console.log('current user ---->', user, loading , subscribed);
+    console.log('current user ---->', user, loading , isAdmin);
 
     const googleLogin = () => {
         setLoading(true);
@@ -100,8 +107,10 @@ const AuthProvider = ({ children }) => {
         loginWithEmainAndPassword,
         subscribed,
         setSubscribed,
-        subscriptionLoading
-        
+        subscriptionLoading,
+        isAdmin,
+        adminLoading,
+        setAdminLoading,
     }
 
 

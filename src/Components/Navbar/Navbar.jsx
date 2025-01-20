@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const { pathname } = useLocation();
-    const { user, logoutUser} = useAuth();
+    const { user, logoutUser, isAdmin} = useAuth();
     // const axiosSecure = useAxiosSecure();
 
 
@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/add-articles'} className={`px-4 py-2  ${pathname === '/add-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Add Articles</Link></div>
         <div className={``}><Link to={'/all-articles'} className={`px-4 py-2  ${pathname === '/all-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>All Articles</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/subscription'} className={`px-4 py-2  ${pathname === '/subscription' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Subscription</Link></div>
-        <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/dashboard'} className={`px-4 py-2  ${pathname === '/dashboard' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Dashboard </Link></div>
+        <div className={`${user?.email && isAdmin ? 'block' : 'hidden'}`}><Link to={'/dashboard'} className={`px-4 py-2  ${pathname === '/dashboard' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Dashboard </Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'my-articles'} className={`px-4 py-2  ${pathname === '/my-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>My Articles</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/premium-articles'} className={`px-4 py-2  ${pathname === '/premium-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Premium Articles</Link></div>
     </>

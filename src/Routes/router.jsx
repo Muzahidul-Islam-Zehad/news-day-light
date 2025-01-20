@@ -18,6 +18,7 @@ import AddPublisher from "../Pages/Dashboard/AddPublisher/AddPublisher";
 import Payment from "../Pages/Payment/Payment";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SubscribedRoute from "./SubscribedRoute/SubscribedRoute";
+import AdminRoute from "./AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element:<Dashboard></Dashboard>,
+                element:<AdminRoute><Dashboard></Dashboard></AdminRoute>,
                 children:[
                     {
                         path:'/dashboard',
