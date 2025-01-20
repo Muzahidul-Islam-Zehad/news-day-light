@@ -16,7 +16,7 @@ const Payment = () => {
     const axiosSecure = useAxiosSecure();
     const stripe = useStripe();
     const elements = useElements();
-    const { user } = useAuth();
+    const { user , setSubscribed} = useAuth();
 
     useEffect(() => {
         if (!paymentInformation) {
@@ -59,17 +59,17 @@ const Payment = () => {
             if (paymentIntent) {
 
                 console.log(paymentIntent);
+
+                const sendDataToDatabase = {
+                    email: user.email,
+                    time: duration
+                }
+                await axiosSecure.patch('/make-premium-user', sendDataToDatabase);
+
+                navigate('/all-articles')
+                toast.success('successful');
+                setSubscribed(true);
             }
-
-            const sendDataToDatabase = {
-                email: user.email,
-                time: duration
-            }
-            await axiosSecure.patch('/make-premium-user', sendDataToDatabase);
-
-            navigate('/all-articles')
-            toast.success('successful');
-
         }
         catch (err) {
             console.log(err);

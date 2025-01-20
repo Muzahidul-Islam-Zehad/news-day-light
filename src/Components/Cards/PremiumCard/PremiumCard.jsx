@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useAuth from "../../../Hooks/useAuth";
 
 const PremiumCard = ({ article }) => {
+
+    const {subscribed} = useAuth();
+
     return (
         <div>
             <div className="card card-compact w-full shadow-xl bg-gradient-to-r from-cyan-500 via-purple-500 to-indigo-500 text-white border border-yellow-400">
@@ -24,7 +28,7 @@ const PremiumCard = ({ article }) => {
                         "A brief description of the premium article..."}...
                     </p>
                     <div className="card-actions justify-end mt-4">
-                        <Link to={`/article-details/${article?._id}`}>
+                        <Link to={subscribed ?`/article-details/${article?._id}` : '/subscription'}>
                             <button className="btn bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-orange-500 hover:to-yellow-400 text-black font-bold shadow-md border-none">
                                 Details
                             </button>

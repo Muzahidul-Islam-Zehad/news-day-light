@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const axiosPublic = useAxiosPublic();
     const [subscribed, setSubscribed] = useState(false);
+    const [subscriptionLoading, setSubscriptionLoading] = useState(true);
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
@@ -32,15 +33,17 @@ const AuthProvider = ({ children }) => {
                 
 
                 axiosPublic.get(`/isPremium?email=${currentUser.email}`)
-                .then(res =>{
-                    if(res.data === false)
+                .then(async(res) =>{
+                    if((res.data) === false)
                     {
                         // logoutUser();
-                        axiosPublic.patch('/remove/subscription', {email : currentUser.email});
+                        await axiosPublic.patch('/remove/subscription', {email : currentUser.email});
                         setSubscribed(false);
+                        setSubscriptionLoading(false);
                     }
                     else{
                         setSubscribed(true);
+                        setSubscriptionLoading(false);
                     }
                 })
                 
@@ -50,13 +53,14 @@ const AuthProvider = ({ children }) => {
                 localStorage.removeItem('token');
                 setUser([]);
                 setLoading(false);
+                setSubscriptionLoading(false)
             }
         })
 
         return () => unSubscribe();
-    }, []);
+    }, [subscribed]);
 
-    console.log('current user ---->', user, loading);
+    console.log('current user ---->', user, loading , subscribed);
 
     const googleLogin = () => {
         setLoading(true);
@@ -94,7 +98,10 @@ const AuthProvider = ({ children }) => {
         registerWithEmailAndPassword,
         updateUserProfile,
         loginWithEmainAndPassword,
-        subscribed
+        subscribed,
+        setSubscribed,
+        subscriptionLoading
+        
     }
 
 
