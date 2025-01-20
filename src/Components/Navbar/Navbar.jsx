@@ -75,7 +75,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <img className="w-12" src='https://i.ibb.co.com/bbq2Hmh/news-Day-Light-Logo-Final.png' alt="" />
-                    <p className=" text-xl ">NewsDayLight</p>
+                    <p className=" hidden md:block text-xl ">NewsDayLight</p>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 text-[#E0E0E0]">
