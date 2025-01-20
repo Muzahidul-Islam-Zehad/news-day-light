@@ -29,7 +29,7 @@ const Payment = () => {
     }, [paymentInformation, navigate]);
 
 
-    console.log(duration, amount);
+    // console.log(duration, amount);
 
     const handlePayment = async (e) => {
         e.preventDefault();
@@ -58,7 +58,7 @@ const Payment = () => {
             }
             if (paymentIntent) {
 
-                console.log(paymentIntent);
+                // console.log(paymentIntent);
 
                 const sendDataToDatabase = {
                     email: user.email,

@@ -52,7 +52,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                 console.log(err);
                 // setArticleLoading(false);
                 setUpdateLoading(false);
-                return console.log('photo not uploaded');
+                return ;
             }
         }
 

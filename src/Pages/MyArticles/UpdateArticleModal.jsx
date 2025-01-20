@@ -32,7 +32,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
             label: tag,
         }))
         : [];
-        console.log(modifiedTags);
+        // console.log(modifiedTags);
         setModifiedTagss(modifiedTags);
 
 
@@ -116,12 +116,12 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
             catch (err) {
                 console.log(err);
                 setArticleLoading(false);
-                return console.log('photo not uploaded');
+                return ;
             }
         }
 
         const formatedTags = selectedOptions.map(select => select.value);
-        console.log('fomatedTags' ,formatedTags);
+        // console.log('fomatedTags' ,formatedTags);
 
         const updatedArticle = { title, publisher, description, formatedTags, photoURL };
 

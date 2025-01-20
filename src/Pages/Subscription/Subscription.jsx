@@ -31,7 +31,7 @@ const Subscription = () => {
         }
 
         setPaymentInformation(selected);
-        console.log('submited');
+        // console.log('submited');
         navigate('/payment')
     }
 

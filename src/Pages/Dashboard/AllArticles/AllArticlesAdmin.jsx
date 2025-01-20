@@ -74,7 +74,7 @@ const AllArticlesAdmin = () => {
         setLoading(true);
         const decliningReason = { decliningReason: reason };
 
-        console.log(decliningReason);
+        // console.log(decliningReason);
 
         try {
             await axiosSecure.patch(`/article/decline/${decliningId}`, decliningReason);
@@ -158,7 +158,7 @@ const AllArticlesAdmin = () => {
     }
 
 
-    console.log(allArticle);
+    // console.log(allArticle);
     return (
         <div>
             <div>

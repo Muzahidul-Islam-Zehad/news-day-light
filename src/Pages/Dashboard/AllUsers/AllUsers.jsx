@@ -39,8 +39,8 @@ const AllUsers = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const { data } = await axiosSecure.patch(`/make-admin/${id}`);
-                    console.log(data);
+                     await axiosSecure.patch(`/make-admin/${id}`);
+                    // console.log(data);
                     Swal.fire({
                         title: "Changed To Admin!",
                         text: "User has updated to admin",

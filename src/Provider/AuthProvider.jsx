@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
         return () => unSubscribe();
     }, [subscribed]);
 
-    console.log('current user ---->', user, loading , isAdmin);
+    // console.log('current user ---->', user, loading , isAdmin);
 
     const googleLogin = () => {
         setLoading(true);

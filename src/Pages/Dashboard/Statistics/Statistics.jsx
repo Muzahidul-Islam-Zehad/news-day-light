@@ -84,7 +84,7 @@ const Statistics = () => {
         legend: { position: "bottom" }, // Legend position
     };
 
-    console.log(publicationData);
+    // console.log(publicationData);
     return (
         <div>
             <Chart

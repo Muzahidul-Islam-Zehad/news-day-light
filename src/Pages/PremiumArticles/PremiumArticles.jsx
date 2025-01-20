@@ -15,7 +15,7 @@ const PremiumArticles = () => {
         }
     });
 
-    console.log(premiumArticles);
+    // console.log(premiumArticles);
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>

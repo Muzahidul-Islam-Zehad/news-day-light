@@ -22,7 +22,7 @@ const Register = () => {
 
     const handleImageUpload = (e) => {
         const imageName = imageNameShorter(e.target.files);
-        console.log(imageName);
+        // console.log(imageName);
         setPhotoName(imageName);
     }
 
@@ -52,7 +52,7 @@ const Register = () => {
 
         const {data} = await axiosPublic.post('/users', userInfo);
 
-        console.log(data);
+        // console.log(data);
 
         if(!data.message)
         {

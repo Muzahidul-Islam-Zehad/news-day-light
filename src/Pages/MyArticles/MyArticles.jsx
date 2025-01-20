@@ -12,7 +12,7 @@ const MyArticles = () => {
     
     const axiosSecure = useAxiosSecure();
 
-    console.log(myArticleData);
+    // console.log(myArticleData);
 
     if (isLoading || !myArticleData) {
         return <LoadingSpinner></LoadingSpinner>
