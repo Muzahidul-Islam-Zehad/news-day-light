@@ -51,4 +51,4 @@ NewsDayLight is a dynamic news platform with a responsive design. Users can brow
 5. Open `http://localhost:3000` in your browser to view the project.
 
 ## Live Project Link:
-[https://newsdaylight-99199.web.app/](#)
+[https://newsdaylight-99199.web.app/](https://newsdaylight-99199.web.app/)
