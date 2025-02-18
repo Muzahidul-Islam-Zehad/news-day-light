@@ -92,16 +92,16 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6">
-                <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Update Profile</h2>
+            <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6 dark:bg-gray-900">
+                <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center dark:text-gray-200">Update Profile</h2>
                 <form onSubmit={handleUpdateSubmit}>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Email <span className="text-slate-400">(read only)</span>
                         </label>
                         <input
                             type="email"
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                             // value={email}
                             defaultValue={currentUser?.email}
                             required
@@ -109,12 +109,12 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Name
                         </label>
                         <input
                             type="text"
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                             // value={name}
                             name="name"
                             defaultValue={currentUser?.name}
@@ -122,12 +122,12 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Phone
                         </label>
                         <input
                             type="number"
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                             // value={name}
                             name="phone"
                             defaultValue={currentUser?.phone}
@@ -135,12 +135,12 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Address
                         </label>
                         <input
                             type="text"
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                             // value={name}
                             name="address"
                             defaultValue={currentUser?.address}
@@ -148,12 +148,12 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Date of birth
                         </label>
                         <input
                             type="date"
-                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white"
                             // value={name}
                             name="birth"
                             defaultValue={currentUser?.birth}
@@ -161,16 +161,16 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Gender 
                         </label>
-                        <select defaultValue={currentUser?.gender} name="gender" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <select defaultValue={currentUser?.gender} name="gender" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white">
                             <option value='male'>Male</option>
                             <option value='female'>Female</option>
                         </select>
                     </div>
                     <div className="mb-6">
-                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                        <label className="block text-sm font-medium text-gray-600 mb-2 dark:text-gray-300">
                             Profile Picture
                         </label>
                         {
@@ -206,7 +206,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                             className="btn btn-primary px-6 py-2 text-white"
                         >
                             {updateLoading ? (
-                                <span className="text-xl animate-spin">
+                                <span className="text-xl animate-spin dark:text-white">
                                     <BsBrightnessHighFill />
                                 </span>
                             ) : (

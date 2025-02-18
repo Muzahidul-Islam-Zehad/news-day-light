@@ -26,7 +26,7 @@ const MyProfile = () => {
     }
 
     return (
-        <div className=" bg-gray-100">
+        <div className=" bg-gray-100 dark:bg-gray-800">
             {/* Banner Section */}
             <div className="relative w-full h-60 bg-gradient-to-r from-blue-500 to-purple-500">
                 <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
@@ -41,25 +41,25 @@ const MyProfile = () => {
             {/* Profile Details Section */}
             <div className="max-w-5xl mx-auto mt-20 p-6">
                 <div className="text-center">
-                    <h1 className="text-3xl font-bold text-gray-800">{data?.name}</h1>
-                    <p className="text-gray-500 text-lg">{data?.role ? "Admin" : data?.premiumEndAt === null ? 'Normal User' : 'Premium User'}</p>
+                    <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200">{data?.name}</h1>
+                    <p className="text-gray-500 text-lg dark:text-gray-400">{data?.role ? "Admin" : data?.premiumEndAt === null ? 'Normal User' : 'Premium User'}</p>
                 </div>
 
                 {/* Profile Info Grid */}
-                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 shadow-md rounded-lg">
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-8 shadow-md rounded-lg dark:bg-gray-700 ">
                     {/* Left Side */}
                     <div className="space-y-4">
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaUser className="text-blue-500 mr-3" />
-                            <span>Full Name: <span className="font-semibold">{data?.name}</span></span>
+                            <span className="dark:text-gray-300">Full Name: <span className="font-semibold">{data?.name}</span></span>
                         </div>
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaEnvelope className="text-red-500 mr-3" />
-                            <span>Email: <span className="font-semibold">{data.email}</span></span>
+                            <span className="dark:text-gray-300">Email: <span className="font-semibold">{data.email}</span></span>
                         </div>
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaPhone className="text-green-500 mr-3" />
-                            <span>Phone: <span className="font-semibold">{data?.phone ? data.phone : 'N/A'}</span></span>
+                            <span className="dark:text-gray-300">Phone: <span className="font-semibold">{data?.phone ? data.phone : 'N/A'}</span></span>
                         </div>
                     </div>
 
@@ -67,15 +67,15 @@ const MyProfile = () => {
                     <div className="space-y-4">
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaMapMarkerAlt className="text-purple-500 mr-3" />
-                            <span>Address: <span className="font-semibold">{data?.address ? data.address : 'N/A'}</span></span>
+                            <span className="dark:text-gray-300">Address: <span className="font-semibold">{data?.address ? data.address : 'N/A'}</span></span>
                         </div>
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaBirthdayCake className="text-yellow-500 mr-3" />
-                            <span>Date of Birth: <span className="font-semibold">{data?.birth ? data.birth : 'N/A'}</span></span>
+                            <span className="dark:text-gray-300">Date of Birth: <span className="font-semibold">{data?.birth ? data.birth : 'N/A'}</span></span>
                         </div>
                         <div className="flex items-center text-gray-700 text-lg">
                             <FaUser className="text-indigo-500 mr-3" />
-                            <span>Gender: <span className="font-semibold">{data?.gender ? data.gender : 'N/A'}</span></span>
+                            <span className="dark:text-gray-300">Gender: <span className="font-semibold">{data?.gender ? data.gender : 'N/A'}</span></span>
                         </div>
                     </div>
                 </div>
