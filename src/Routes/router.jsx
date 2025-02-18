@@ -20,6 +20,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import SubscribedRoute from "./SubscribedRoute/SubscribedRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
                     {
                         path:'add-publisher',
                         element: <AddPublisher></AddPublisher>
+                    },
+                    {
+                        path: 'my-profile',
+                        element: <MyProfile></MyProfile>
                     }
                 ]
             },

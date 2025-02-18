@@ -4,7 +4,7 @@ import { IoIosMenu } from "react-icons/io";
 const Dashboard = () => {
     const { pathname } = useLocation();
 
-    const closeDrawer = () =>{
+    const closeDrawer = () => {
         document.getElementById('my-drawer-2').checked = false;
     }
 
@@ -47,6 +47,12 @@ const Dashboard = () => {
                         <Link to={'/dashboard/add-publisher'} onClick={closeDrawer}>
                             <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/add-publisher' ? 'bg-slate-400 text-white' : ''}`}>
                                 Add Publisher
+                            </div>
+                        </Link>
+                        <div className="divider mt-10"></div>
+                        <Link to={'/dashboard/my-profile'} onClick={closeDrawer}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/my-profile' ? 'bg-slate-400 text-white' : ''}`}>
+                                My Profile
                             </div>
                         </Link>
                     </ul>
