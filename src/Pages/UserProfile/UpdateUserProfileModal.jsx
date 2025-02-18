@@ -13,7 +13,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
     const [updateLoading, setUpdateLoading] = useState(false);
     const fileRef = useRef(null);
     const axiosSecure = useAxiosSecure();
-    const { user,updateUserProfile, setLoading } = useAuth();
+    const { user, updateUserProfile, setLoading } = useAuth();
 
     useEffect(() => {
         if (!isOpen) {
@@ -40,9 +40,15 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
 
         const form = e.target;
         const name = form.name.value;
+        const phone = form.phone.value;
+        const address = form.address.value;
+        const birth = form.birth.value;
+        const gender = form.gender.value;
         const image = form.image?.files[0] || null;
 
         let photoURL = currentUser?.photoURL;
+
+        
 
         if (image) {
             try {
@@ -52,11 +58,11 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                 console.log(err);
                 // setArticleLoading(false);
                 setUpdateLoading(false);
-                return ;
+                return;
             }
         }
 
-        const updatedData = { name, photoURL };
+        const updatedData = { name, photoURL, phone, address, birth, gender };
 
         try {
             await axiosSecure.patch(`/users/${user.email}`, updatedData);
@@ -79,7 +85,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
             onClose();
         }
 
-        //  // Close modal after updating
+         // Close modal after updating
     };
 
 
@@ -89,6 +95,19 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
             <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3 p-6">
                 <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Update Profile</h2>
                 <form onSubmit={handleUpdateSubmit}>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                            Email <span className="text-slate-400">(read only)</span>
+                        </label>
+                        <input
+                            type="email"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            // value={email}
+                            defaultValue={currentUser?.email}
+                            required
+                            readOnly
+                        />
+                    </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600 mb-2">
                             Name
@@ -104,16 +123,51 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                     </div>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600 mb-2">
-                            Email <span className="text-slate-400">(read only)</span>
+                            Phone
                         </label>
                         <input
-                            type="email"
+                            type="number"
                             className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            // value={email}
-                            defaultValue={currentUser?.email}
-                            required
-                            readOnly
+                            // value={name}
+                            name="phone"
+                            defaultValue={currentUser?.phone}
+                            
                         />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                            Address
+                        </label>
+                        <input
+                            type="text"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            // value={name}
+                            name="address"
+                            defaultValue={currentUser?.address}
+                            
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                            Date of birth
+                        </label>
+                        <input
+                            type="date"
+                            className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            // value={name}
+                            name="birth"
+                            defaultValue={currentUser?.birth}
+                            
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-600 mb-2">
+                            Gender 
+                        </label>
+                        <select defaultValue={currentUser?.gender} name="gender" className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value='male'>Male</option>
+                            <option value='female'>Female</option>
+                        </select>
                     </div>
                     <div className="mb-6">
                         <label className="block text-sm font-medium text-gray-600 mb-2">
