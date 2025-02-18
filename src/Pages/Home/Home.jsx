@@ -321,7 +321,7 @@ const Home = () => {
 
                             {/* Right: Accordion */}
                             <div className="">
-                                <h2 className="text-3xl font-bold text-gray-800 mb-6">
+                                <h2 className="text-3xl dark:text-gray-200 font-bold text-gray-800 mb-6">
                                     Frequently Asked Questions
                                 </h2>
                                 <div className="space-y-4">

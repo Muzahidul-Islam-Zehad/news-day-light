@@ -133,18 +133,18 @@ const AddArticles = () => {
     }
 
     return (
-        <div className="bg-[#F4F6F8] py-6">
+        <div className="bg-[#F4F6F8] dark:bg-gray-900 py-6">
             <div>
                 <PageHeading title=' add article' subtitle='Post your creative article'></PageHeading>
             </div>
-            <div className="my-4">
+            <div className="my-4 ">
                 <form
-                    className="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-md"
+                    className="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-md dark:bg-gray-800"
                     onSubmit={handleSubmit}
                 >
                     {/* Title */}
                     <div className="mb-4">
-                        <label htmlFor="title" className="block text-lg font-medium text-gray-700">
+                        <label htmlFor="title" className="block text-lg font-medium text-gray-700 dark:text-gray-400">
                             Title
                         </label>
                         <input
@@ -152,7 +152,7 @@ const AddArticles = () => {
                             id="title"
                             name="title"
                             placeholder="Enter article title"
-                            className="input input-bordered focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] w-full mt-2 bg-[#F9FAFB]"
+                            className="input input-bordered focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] w-full mt-2 bg-[#F9FAFB] dark:bg-gray-700 dark:text-white"
 
                             required
                         />
@@ -160,14 +160,14 @@ const AddArticles = () => {
 
                     {/* Image File */}
                     <div className="mb-4">
-                        <label className="block text-lg font-medium text-gray-700 mb-2">
+                        <label className="block text-lg font-medium text-gray-700 mb-2 dark:text-gray-400">
                             Upload Image
                         </label>
-                        <label className=" label text-center border border-dashed hover:cursor-pointer border-gray-400 p-3 rounded-md bg-[#F9FAFB] w-full">
+                        <label className=" label text-center border border-dashed hover:cursor-pointer border-gray-400 p-3 rounded-md bg-[#F9FAFB] w-full dark:bg-gray-700 dark:text-gray-400">
                             {
                                 photoName ? <span>{photoName}</span> : <span>Choose A Photo</span>
                             }
-                            <input onChange={handleImageUpload} hidden type="file" name="image" id="image" />
+                            <input className="" onChange={handleImageUpload} hidden type="file" name="image" id="image" />
                         </label>
                     </div>
 
@@ -175,14 +175,14 @@ const AddArticles = () => {
 
                     {/* Publisher */}
                     <div className="mb-4">
-                        <label htmlFor="publisher" className="block text-lg font-medium text-gray-700">
+                        <label htmlFor="publisher" className="block text-lg font-medium text-gray-700 dark:text-gray-400">
                             Publisher
                         </label>
                         <select
                             id="publisher"
                             name="publisher"
                             defaultValue=""
-                            className="select select-bordered w-full mt-2  focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] bg-[#F9FAFB]"
+                            className="select select-bordered w-full mt-2  focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] bg-[#F9FAFB] dark:bg-gray-700 dark:text-white"
                             required
                         >
                             <option disabled value="">Select Publisher</option>
@@ -196,7 +196,7 @@ const AddArticles = () => {
 
                     {/* Tags */}
                     <div className="mb-4">
-                        <label className="block text-lg font-medium text-gray-700">
+                        <label className="block text-lg font-medium text-gray-700 dark:text-gray-400 ">
                             Tags
                         </label>
                         <Select
@@ -211,14 +211,14 @@ const AddArticles = () => {
 
                     {/* Description */}
                     <div className="mb-4">
-                        <label htmlFor="description" className="block text-lg font-medium text-gray-700">
+                        <label htmlFor="description" className="block text-lg font-medium text-gray-700 dark:text-gray-400">
                             Description
                         </label>
                         <textarea
                             id="description"
                             name="description"
                             placeholder="Enter article description"
-                            className="textarea textarea-bordered w-full mt-2  focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] bg-[#F9FAFB]"
+                            className="textarea textarea-bordered w-full mt-2  focus:ring-2 focus:ring-[#00B4D8] foucs:outline-none focus:border-[#00B4D8] bg-[#F9FAFB] dark:bg-gray-700 dark:text-white"
                             rows="4"
                             required
                         ></textarea>
