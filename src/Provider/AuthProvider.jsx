@@ -17,9 +17,20 @@ const AuthProvider = ({ children }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [subscriptionLoading, setSubscriptionLoading] = useState(true);
     const [adminLoading, setAdminLoading] = useState(true);
+    const [darkMode, setDarkMode] = useState(
+        localStorage.getItem("theme") === "dark"
+      );
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, async(currentUser) => {
+
+            if (darkMode) {
+                document.documentElement.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+              } else {
+                document.documentElement.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+              }
             
             if (currentUser) {
                 // setLoading(true);
@@ -65,7 +76,7 @@ const AuthProvider = ({ children }) => {
         })
 
         return () => unSubscribe();
-    }, [subscribed]);
+    }, [subscribed, darkMode]);
 
     // console.log('current user ---->', user, loading , isAdmin);
 
@@ -111,6 +122,8 @@ const AuthProvider = ({ children }) => {
         isAdmin,
         adminLoading,
         setAdminLoading,
+        darkMode, 
+        setDarkMode,
     }
 
 

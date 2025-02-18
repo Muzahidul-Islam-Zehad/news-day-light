@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const { pathname } = useLocation();
-    const { user, logoutUser, isAdmin } = useAuth();
+    const { user, logoutUser, isAdmin, darkMode, setDarkMode } = useAuth();
     // const axiosSecure = useAxiosSecure();
 
 
@@ -52,7 +52,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="bg-[#003366] text-[#FFFFFF]">
+        <div className="bg-[#003366] text-[#FFFFFF] bg-opacity-85 backdrop-blur-lg">
             <div className="navbar  default-width">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -82,7 +82,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex flex-col justify-center items-center mr-3">
                         <img className="w-12" src='https://i.ibb.co.com/Y7VfxdWN/news-Day-Light-Logo-Final.png' alt="" />
-                        <p className=" hidden md:block text-xl ">NewsDayLight</p>
+                        {/* <p className=" hidden md:block text-xl ">NewsDayLight</p> */}
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -90,7 +90,7 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end ml-4">
                     {
                         user?.email
                             ?
@@ -99,7 +99,7 @@ const Navbar = () => {
 
                                 <div className="dropdown dropdown-left">
                                     <div tabIndex={0} role="button"><div className="avatar cursor-pointer">
-                                        <div className="ring-primary ring-offset-base-100 w-8 h-8 md:w-12 md:h-12 rounded-full ring ring-offset-2">
+                                        <div className="ring-primary ring-offset-base-100 w-8 h-8  rounded-full ring ring-offset-2">
                                             <img src={user?.photoURL} />
                                         </div>
                                     </div></div>
@@ -117,7 +117,14 @@ const Navbar = () => {
                                 <Link to={'/registration'} className="btn w-20 rounded-l-none rounded-r-3xl border border-l-gray-200">Register</Link>
                             </>
                     }
-
+                    <div className="ml-4">
+                        <button
+                            onClick={() => setDarkMode(!darkMode)}
+                            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800"
+                        >
+                            {darkMode ? "🌙" : "☀️"}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
