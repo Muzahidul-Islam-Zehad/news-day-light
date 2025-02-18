@@ -151,11 +151,11 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
     return (
         <td>
             <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-                <div className="bg-white max-w-2xl w-full mx-4 rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-white max-w-2xl w-full mx-4 rounded-lg shadow-lg overflow-hidden dark:bg-gray-900">
                     <div className="flex justify-between items-center px-6 py-4 border-b">
-                        <h2 className="text-lg font-semibold">Update Article</h2>
+                        <h2 className="text-lg font-semibold dark:text-gray-200">Update Article</h2>
                         <button
-                            className="text-gray-500 hover:text-gray-700"
+                            className="text-gray-500 text-xl dark:text-gray-200 hover:text-gray-700"
                             onClick={onClose}
                         >
                             &times;
@@ -166,7 +166,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                         <form onSubmit={(e) => handleUpdate(e, article._id)}>
                             {/* Title */}
                             <div className="mb-4">
-                                <label htmlFor="title" className="block text-lg font-medium text-gray-700">
+                                <label htmlFor="title" className="block text-lg font-medium text-gray-700 dark:text-gray-300">
                                     Title
                                 </label>
                                 <input
@@ -175,21 +175,21 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                     name="title"
                                     defaultValue={article.articleTitle}
                                     placeholder="Enter article title"
-                                    className="input input-bordered focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] w-full mt-2 bg-[#F9FAFB]"
+                                    className="input input-bordered focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] w-full mt-2 bg-[#F9FAFB] dark:bg-gray-800 dark:text-white"
                                     required
                                 />
                             </div>
 
                             {/* Publisher */}
                             <div className="mb-4">
-                                <label htmlFor="publisher" className="block text-lg font-medium text-gray-700">
+                                <label htmlFor="publisher" className="block text-lg font-medium text-gray-700 dark:text-gray-300">
                                     Publisher
                                 </label>
                                 <select
                                     id="publisher"
                                     name="publisher"
                                     defaultValue={article.publisher}
-                                    className="select select-bordered w-full mt-2 focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] bg-[#F9FAFB]"
+                                    className="select select-bordered w-full mt-2 focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] bg-[#F9FAFB] dark:bg-gray-800 dark:text-white"
                                     required
                                 >
                                     <option value="">Select Publisher</option>
@@ -201,7 +201,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
                             {/* Tags */}
                             <div className="mb-4">
-                                <label className="block text-lg font-medium text-gray-700">
+                                <label className="block text-lg font-medium text-gray-700 dark:text-gray-300">
                                     Tags
                                 </label>
                                 <Select
@@ -218,7 +218,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
                             {/* Description */}
                             <div className="mb-4">
-                                <label htmlFor="description" className="block text-lg font-medium text-gray-700">
+                                <label htmlFor="description" className="block text-lg font-medium text-gray-700 dark:text-gray-300">
                                     Description
                                 </label>
                                 <textarea
@@ -226,7 +226,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                     name="description"
                                     defaultValue={article.articleDescription}
                                     placeholder="Enter article description"
-                                    className="textarea textarea-bordered w-full mt-2 focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] bg-[#F9FAFB]"
+                                    className="textarea textarea-bordered w-full mt-2 focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] bg-[#F9FAFB] dark:bg-gray-800 dark:text-white"
                                     rows="4"
                                     required
                                 ></textarea>
@@ -234,7 +234,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
                             {/* Image File */}
                             <div className="mb-4">
-                                <label className="block text-lg font-medium text-gray-700 mb-2">
+                                <label className="block text-lg font-medium text-gray-700 mb-2 dark:text-gray-300">
                                     Upload Image
                                 </label>
                                 <div>
@@ -251,7 +251,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                         </div>
                                     ) : (
                                         <div className="flex items-center gap-4">
-                                            <label className="text-center border border-dashed hover:cursor-pointer border-gray-400 p-3 rounded-md bg-[#F9FAFB] w-full">
+                                            <label className="text-center border border-dashed hover:cursor-pointer border-gray-400 p-3 rounded-md bg-[#F9FAFB] w-full dark:bg-gray-800 dark:text-white">
                                                 {photoName ? photoName : "Choose A Photo"}
                                                 <input
                                                     type="file"
