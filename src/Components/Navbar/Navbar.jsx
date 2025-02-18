@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const { pathname } = useLocation();
-    const { user, logoutUser, isAdmin} = useAuth();
+    const { user, logoutUser, isAdmin } = useAuth();
     // const axiosSecure = useAxiosSecure();
 
 
@@ -28,7 +28,13 @@ const Navbar = () => {
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/subscription'} className={`px-4 py-2  ${pathname === '/subscription' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Subscription</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'my-articles'} className={`px-4 py-2  ${pathname === '/my-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>My Articles</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/premium-articles'} className={`px-4 py-2  ${pathname === '/premium-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Premium Articles</Link></div>
-        <div className={`${user?.email && isAdmin ? 'block' : 'hidden'}`}><Link to={'/dashboard'} className={`px-4 py-2  ${pathname === '/dashboard' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Dashboard </Link></div>
+        {
+            isAdmin ?
+
+                <div className={`${user?.email && isAdmin ? 'block' : 'hidden'}`}><Link to={'/dashboard'} className={`px-4 py-2  ${pathname === '/dashboard' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Dashboard </Link></div>
+                :
+                <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/user-dashboard'} className={`px-4 py-2  ${pathname === '/user-dashboard' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Dashboard </Link></div>
+        }
     </>
 
 
@@ -50,7 +56,7 @@ const Navbar = () => {
             <div className="navbar  default-width">
                 <div className="navbar-start">
                     <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+                        <div tabIndex={0} role="button" className="w-8 h-8 flex justify-start items-center lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-5 w-5"
@@ -74,8 +80,10 @@ const Navbar = () => {
 
                         </ul>
                     </div>
-                    <img className="w-12" src='https://i.ibb.co.com/bbq2Hmh/news-Day-Light-Logo-Final.png' alt="" />
-                    <p className=" hidden md:block text-xl ">NewsDayLight</p>
+                    <div className="flex flex-col justify-center items-center mr-3">
+                        <img className="w-12" src='https://i.ibb.co.com/Y7VfxdWN/news-Day-Light-Logo-Final.png' alt="" />
+                        <p className=" hidden md:block text-xl ">NewsDayLight</p>
+                    </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 text-[#E0E0E0]">
@@ -87,15 +95,21 @@ const Navbar = () => {
                         user?.email
                             ?
                             <div className="flex items-center justify-between gap-4">
-                                <Link to={'/user/profile'}>
-                                    {/* <img referrerPolicy="no-referrer" className="w-12 h-12 rounded-full border-2 object-cover border-yellow-400" src={user?.photoURL} alt="user" /> */}
-                                    <div className="avatar">
+                                {/* <img referrerPolicy="no-referrer" className="w-12 h-12 rounded-full border-2 object-cover border-yellow-400" src={user?.photoURL} alt="user" /> */}
+
+                                <div className="dropdown dropdown-left">
+                                    <div tabIndex={0} role="button"><div className="avatar cursor-pointer">
                                         <div className="ring-primary ring-offset-base-100 w-8 h-8 md:w-12 md:h-12 rounded-full ring ring-offset-2">
                                             <img src={user?.photoURL} />
                                         </div>
-                                    </div>
-                                </Link>
-                                <button onClick={handleLogOut} className="btn btn-sm md:btn-md border-none hover:bg-[#913831] bg-[#ea645b]  text-white ">Logout</button>
+                                    </div></div>
+                                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-lg z-[1]  p-1 shadow mr-2">
+                                        <li>
+                                            <button onClick={handleLogOut} className="btn btn-sm md:btn-md border-none hover:bg-[#913831] bg-[#ea645b]  text-white ">Logout</button>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
                             :
                             <>

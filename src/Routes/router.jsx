@@ -10,7 +10,6 @@ import PremiumArticles from "../Pages/PremiumArticles/PremiumArticles";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import ArticleDetails from "../Pages/ArticleDetails/ArticleDetails";
-import UserProfile from "../Pages/UserProfile/UserProfile";
 import Statistics from "../Pages/Dashboard/Statistics/Statistics";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AllArticlesAdmin from "../Pages/Dashboard/AllArticles/AllArticlesAdmin";
@@ -21,6 +20,7 @@ import SubscribedRoute from "./SubscribedRoute/SubscribedRoute";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile";
+import UserDashboard from "../Pages/User Dashboard/UserDashboard/UserDashboard";
 
 const router = createBrowserRouter([
     {
@@ -70,6 +70,20 @@ const router = createBrowserRouter([
                 ]
             },
             {
+                path:'/user-dashboard',
+                element: <UserDashboard></UserDashboard>,
+                children: [
+                    {
+                        path:'/user-dashboard',
+                        element: <Statistics></Statistics>
+                    },
+                    {
+                        path: 'my-profile',
+                        element: <MyProfile></MyProfile>
+                    }
+                ]
+            },
+            {
                 path:'/my-articles',
                 element: <PrivateRoute><MyArticles></MyArticles></PrivateRoute>
             },
@@ -81,10 +95,6 @@ const router = createBrowserRouter([
                 path: '/article-details/:id',
                 element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>
             },
-            {
-                path: '/user/profile',
-                element: <PrivateRoute><UserProfile></UserProfile></PrivateRoute>
-            }
         ]
     },
     {
