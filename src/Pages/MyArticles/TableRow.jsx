@@ -27,7 +27,7 @@ const TableRow = ({ article, idx, handleDelete, refetch }) => {
     };
 
     return (
-        <tr className="hover font-medium">
+        <tr className="dark:text-gray-400 font-medium">
             <th>{idx + 1}</th>
             <td>
                 {articleTitle.length > 40
@@ -48,7 +48,7 @@ const TableRow = ({ article, idx, handleDelete, refetch }) => {
                         'bg-red-200 px-4 py-1 rounded-3xl'
                         } ${status === 'Approved' && 'bg-lime-200 px-4 py-1 rounded-3xl'}`}
                 >
-                    <span>{status}</span>
+                    <span className="text-black">{status}</span>
                 </span>
                 {status === 'Declined' && <button onClick={handleSeeDeclineReason} className="btn btn-xs ml-4">see reason</button>}
             </td>

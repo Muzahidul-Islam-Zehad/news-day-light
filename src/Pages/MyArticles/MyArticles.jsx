@@ -58,7 +58,7 @@ const MyArticles = () => {
             </div>
             <div>
                 <div className="overflow-x-auto">
-                    <h1 className="text-xl font-bold my-4">Article found : {myArticleData.length}</h1>
+                    <h1 className="text-xl font-bold my-4 dark:text-gray-200">Article Found : {myArticleData.length}</h1>
                     <table className="table border">
                         {/* head */}
                         <thead className="bg-[#003366] text-[#FFFFFF]">
