@@ -22,7 +22,7 @@ const PremiumArticles = () => {
     }
 
     return (
-        <div className="bg-slate-200 py-6">
+        <div className="bg-slate-200 py-6 dark:bg-gray-900">
             <div className="w-11/12 mx-auto ">
                 <div>
                     <PageHeading title='premium articles' subtitle='Find your premium articles'></PageHeading>
