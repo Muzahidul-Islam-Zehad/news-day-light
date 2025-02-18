@@ -80,11 +80,11 @@ const Payment = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
-                <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">Total Payment Amount</h1>
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900">
+            <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md dark:bg-gray-800 dark:shadow-gray-600">
+                <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6 dark:text-gray-200">Total Payment Amount</h1>
                 <div className="flex justify-center mb-6">
-                    <h2 className="text-lg font-semibold text-gray-800">${amount}</h2>
+                    <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-400">${amount}</h2>
                 </div>
                 <form onSubmit={handlePayment} className="space-y-6">
                     <div className="border p-4 rounded-lg bg-gray-50">
@@ -99,7 +99,7 @@ const Payment = () => {
                             loading ?
                                 <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
                                 :
-                                `Pay ${amount}`
+                                `Pay $${amount}`
                         }
                     </button>
                 </form>
