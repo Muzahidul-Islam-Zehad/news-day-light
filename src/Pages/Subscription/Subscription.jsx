@@ -37,7 +37,7 @@ const Subscription = () => {
 
 
     return (
-        <div className="bg-slate-100 py-10">
+        <div className="bg-slate-100 py-10 dark:bg-gray-900">
             <div className="w-11/12 mx-auto">
                 <div>
                     <PageHeading title={'subscription'} subtitle={'Become a premium user'}></PageHeading>
@@ -62,18 +62,18 @@ const Subscription = () => {
                     </div>
                 </div>
 
-                <div className=" mt-6 flex justify-center items-center border p-10 w-11/12 md:w-3/4 lg:w-2/5 mx-auto bg-white shadow-lg">
+                <div className=" mt-6 flex justify-center items-center border p-10 w-11/12 md:w-3/4 lg:w-2/5 mx-auto bg-white shadow-lg dark:bg-gray-800 rounded-lg">
                     {
                         data
                             ?
 
                             <div>
-                                <h1>You Hava Alredy Became A Premium User</h1>
+                                <h1 className="dark:text-gray-200">You Hava Alredy Became A Premium User</h1>
                             </div>
                             :
                             <form onSubmit={handleOnSubmit} className="">
-                                <h1 className="text-xl font-bold text-center mb-4 ">Choose A Plan</h1>
-                                <select value={selected} onChange={(e) => setSelected(e.target.value)} className="select select-bordered w-full max-w-xs bg-slate-100">
+                                <h1 className="text-xl font-bold text-center mb-4 dark:text-gray-200">Choose A Plan</h1>
+                                <select value={selected} onChange={(e) => setSelected(e.target.value)} className="select select-bordered w-full max-w-xs bg-slate-100 dark:bg-gray-700 dark:text-white">
                                     <option disabled value=''>Choose a Plan</option>
                                     <option value='60 1'>1 Minute ($1)</option>
                                     <option value='432000 5'>5 Days ($5)</option>
