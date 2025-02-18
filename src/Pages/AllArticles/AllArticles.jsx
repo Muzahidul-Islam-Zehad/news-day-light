@@ -54,20 +54,20 @@ const AllArticles = () => {
     //     return <LoadingSpinner></LoadingSpinner>
     // }
     return (
-        <div className="bg-slate-200 py-10">
+        <div className="bg-slate-200 dark:bg-gray-900 py-10">
             <div className="w-11/12 mx-auto">
                 <div>
                     <PageHeading title='all articles' subtitle='Explore every bits of news'></PageHeading>
                 </div>
                 <div className="flex gap-2 flex-col md:flex-row md:justify-between items-center mt-6">
-                    <div className="">
-                        <label className="input input-bordered flex items-center gap-2">
-                            <input value={search} onChange={(e) => { setSearch(e.target.value) }} type="text" className="grow" placeholder="Search" />
+                    <div className=" ">
+                        <label className="input input-bordered flex items-center gap-2 dark:bg-gray-800 dark:text-white">
+                            <input value={search} onChange={(e) => { setSearch(e.target.value) }} type="text" className="grow " placeholder="Search" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 16 16"
                                 fill="currentColor"
-                                className="h-4 w-4 opacity-70">
+                                className="h-4 w-4 opacity-70 dark:text-gray-300">
                                 <path
                                     fillRule="evenodd"
                                     d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
@@ -76,7 +76,7 @@ const AllArticles = () => {
                         </label>
                     </div>
                     <div className="">
-                        <select value={publicationFilter} onChange={(e) => { setPublicationFiler(e.target.value) }} className="select select-bordered w-full max-w-xs">
+                        <select value={publicationFilter} onChange={(e) => { setPublicationFiler(e.target.value) }} className="select select-bordered w-full max-w-xs dark:bg-gray-800 dark:text-white">
                             <option value="">All Publisher Article</option>
                             {
                                 publishers.map(p => <option key={p._id}>{p.publisherName}</option>)
