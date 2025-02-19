@@ -428,13 +428,120 @@ const Home = () => {
                                         </div>
                                     </div>
 
-                                
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* Become admin */}
+            <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6">
+                <div className="max-w-4xl mx-auto text-center">
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-6">
+                        How to Become an Admin
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-300 mb-8">
+                        Follow these steps to apply for an admin role and take control of NewsDayLight’s content management.
+                    </p>
+
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {/* Step 1 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="text-4xl text-blue-500 dark:text-blue-400 font-bold mb-3">1</div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Register & Verify</h3>
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Sign up and verify your email to access your dashboard.
+                            </p>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="text-4xl text-blue-500 dark:text-blue-400 font-bold mb-3">2</div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Contribute Articles</h3>
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Publish high-quality articles and engage with the community.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="text-4xl text-blue-500 dark:text-blue-400 font-bold mb-3">3</div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Meet the Criteria</h3>
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Ensure your content meets platform guidelines and user engagement standards.
+                            </p>
+                        </div>
+
+                        {/* Step 4 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="text-4xl text-blue-500 dark:text-blue-400 font-bold mb-3">4</div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Apply for Admin Role</h3>
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Submit your admin application via your dashboard.
+                            </p>
+                        </div>
+
+                        {/* Step 5 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                            <div className="text-4xl text-blue-500 dark:text-blue-400 font-bold mb-3">5</div>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Get Approved</h3>
+                            <p className="text-gray-600 dark:text-gray-300">
+                                Our team reviews your application, and if approved, you gain admin privileges!
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* <button className="mt-8 px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 dark:bg-blue-400 dark:hover:bg-blue-500 transition">
+                        Apply Now
+                    </button> */}
+                </div>
+            </section>
+
+            <section className="bg-gray-100 dark:bg-gray-900 py-16 px-6">
+                <div className="max-w-6xl mx-auto text-center">
+                    {/* Section Title */}
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-6">
+                        How <span className="text-blue-500">NewsDayLight</span> Works
+                    </h2>
+                    <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-12">
+                        Whether you&apos;re a reader, writer, or an aspiring journalist, NewsDayLight makes it easy to explore, create, and engage with news content.
+                    </p>
+
+                    {/* Steps */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* Step 1 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                            <span className="text-4xl text-blue-500">📰</span>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-4">Browse News</h3>
+                            <p className="text-gray-600 dark:text-gray-300 mt-2">
+                                Discover trending and exclusive articles from trusted publishers and independent writers.
+                            </p>
+                        </div>
+
+                        {/* Step 2 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                            <span className="text-4xl text-green-500">✍️</span>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-4">Post Articles</h3>
+                            <p className="text-gray-600 dark:text-gray-300 mt-2">
+                                Sign up as a writer and share your insights, opinions, and reports with a global audience.
+                            </p>
+                        </div>
+
+                        {/* Step 3 */}
+                        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                            <span className="text-4xl text-red-500">⭐</span>
+                            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-4">Get Premium Access</h3>
+                            <p className="text-gray-600 dark:text-gray-300 mt-2">
+                                Subscribe for exclusive articles, in-depth analysis, and an ad-free reading experience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
         </div>
     );
 };

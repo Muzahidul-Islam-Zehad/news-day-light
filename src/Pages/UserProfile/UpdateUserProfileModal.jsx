@@ -180,7 +180,7 @@ const UpdateUserProfileModal = ({ isOpen, onClose, currentUser, refetch }) => {
                                         type="file"
                                         ref={fileRef}
                                         name="image"
-                                        className="w-full p-2 border rounded-md focus:outline-none"
+                                        className="w-full p-2 border rounded-md focus:outline-none dark:text-white"
                                     />
                                     <button disabled={updateLoading} onClick={handleCancelFileInput} type="button" className=" btn ">Cancel</button>
                                 </div>

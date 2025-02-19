@@ -21,6 +21,7 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import MyProfile from "../Pages/Dashboard/MyProfile/MyProfile";
 import UserDashboard from "../Pages/User Dashboard/UserDashboard/UserDashboard";
+import AboutUs from "../Pages/AboutUs/AboutUs";
 
 const router = createBrowserRouter([
     {
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
                 path: '/article-details/:id',
                 element: <PrivateRoute><ArticleDetails></ArticleDetails></PrivateRoute>
             },
+            {
+                path:'/about-us',
+                element: <AboutUs></AboutUs>
+            }
         ]
     },
     {

@@ -27,6 +27,7 @@ const Navbar = () => {
         <div className={``}><Link to={'/all-articles'} className={`px-4 py-2  ${pathname === '/all-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>All Articles</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/subscription'} className={`px-4 py-2  ${pathname === '/subscription' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Subscription</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'my-articles'} className={`px-4 py-2  ${pathname === '/my-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>My Articles</Link></div>
+        <div className={``}><Link to={`about-us`} className={`px-4 py-2  ${pathname === '/about-us' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>About Us</Link></div>
         <div className={`${user?.email ? 'block' : 'hidden'}`}><Link to={'/premium-articles'} className={`px-4 py-2  ${pathname === '/premium-articles' ? 'bg-[#00B4D8] rounded-lg font-bold' : ''}`}>Premium Articles</Link></div>
         {
             isAdmin ?
