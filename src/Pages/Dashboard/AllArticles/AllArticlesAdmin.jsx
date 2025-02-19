@@ -13,8 +13,8 @@ const AllArticlesAdmin = () => {
     const [loading, setLoading] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [decliningId, setDecliningId] = useState('');
-    const [currentPage, setCurrentPage] = useState(0); 
-    const [limit, setLimit] = useState(5); 
+    const [currentPage, setCurrentPage] = useState(0);
+    const [limit, setLimit] = useState(5);
 
     const handleOpenModal = () => setIsModalOpen(true);
     const handleCloseModal = () => {
@@ -171,7 +171,7 @@ const AllArticlesAdmin = () => {
                             :
                             <table className="table w-full border border-gray-300 rounded-lg shadow-md">
                                 {/* Table Head */}
-                                <thead className="bg-gray-200">
+                                <thead className="bg-gray-200 dark:bg-[#003366] dark:text-white">
                                     <tr>
                                         <th className="py-3 px-4 text-left">#</th>
                                         <th className="py-3 px-4 text-left">Article Title</th>
@@ -191,7 +191,7 @@ const AllArticlesAdmin = () => {
                                     {/* table Row */}
 
                                     {
-                                        allArticle?.articles.map((article, idx) => <tr key={article?._id} className="hover:bg-gray-100 border-t">
+                                        allArticle?.articles.map((article, idx) => <tr key={article?._id} className=" border-t dark:text-gray-200">
                                             <td className="py-3 px-4">{idx + 1}</td>
                                             <td className="py-3 px-4">{
                                                 article.articleTitle.length > 40 ? article.articleTitle.substring(0, 30) + '...' : article.articleTitle
@@ -210,7 +210,7 @@ const AllArticlesAdmin = () => {
                                             </td>
                                             <td className="py-3 px-4">{article?.userInfo?.email}</td>
                                             <td className="py-3 px-4">{format(new Date(article?.createdAt), 'PPPP')}</td>
-                                            <td className="py-3 px-4">
+                                            <td className="py-3 px-4 dark:text-black">
                                                 <span className={`${status === 'Pending' && 'bg-yellow-200 px-4 py-1 rounded-3xl'} ${article?.status === 'Accepted' && 'bg-green-200 px-4 py-1 rounded-3xl'
                                                     } ${article?.status === 'Declined' &&
                                                     'bg-red-200 px-4 py-1 rounded-3xl cursor-pointer'
@@ -220,13 +220,13 @@ const AllArticlesAdmin = () => {
                                             </td>
                                             <td className="py-3 px-4">{article.publisher}</td>
                                             <td className="py-3 px-4">
-                                                <button disabled={article.status === 'Approved' || article.status === 'Declined'} onClick={() => handleAproveArticle(article._id)} className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1">
+                                                <button disabled={article.status === 'Approved' || article.status === 'Declined'} onClick={() => handleAproveArticle(article._id)} className="btn btn-md bg-green-500 text-white hover:bg-green-600 rounded-md px-3 py-1 disabled:bg-gray-400 disabled:text-white">
                                                     Approve
                                                 </button>
                                             </td>
                                             <td className="py-3 px-4">
                                                 <button onClick={() => { handleOpenModal(), setDecliningId(article._id) }} disabled={article.status === 'Approved' || article.status === 'Declined'}
-                                                    className="btn btn-md bg-red-500 text-white hover:bg-red-600 rounded-md px-3 py-1">
+                                                    className="btn btn-md bg-red-500 text-white hover:bg-red-600 rounded-md px-3 py-1 disabled:bg-gray-400 disabled:text-white">
                                                     Decline
                                                 </button>
                                             </td>
@@ -242,7 +242,7 @@ const AllArticlesAdmin = () => {
                                                         <span>Premium</span>
                                                         :
 
-                                                        <button disabled={article.status === 'Declined'} onClick={() => handleMakePremium(article._id)} className="btn btn-md bg-purple-500 text-white hover:bg-purple-600 rounded-md px-3 py-1">
+                                                        <button disabled={article.status === 'Declined'} onClick={() => handleMakePremium(article._id)} className="btn btn-md bg-purple-500 text-white hover:bg-purple-600 rounded-md px-3 py-1 ">
                                                             Make Premium
                                                         </button>
                                                 }
@@ -263,23 +263,30 @@ const AllArticlesAdmin = () => {
                         previousLabel={"Previous"}
                         nextLabel={"Next"}
                         breakLabel={"..."}
-                        pageCount={allArticle.totalPages}
+                        pageCount={allArticle?.totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
-                        onPageChange={handlePageClick} // Handle page click
-                        containerClassName="flex items-center justify-center space-x-2 mt-4" // Overall pagination container
-                        pageClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Page item
-                        pageLinkClassName="text-gray-700" // Page link
-                        activeClassName="bg-blue-500 text-white" // Active page
-                        activeLinkClassName="font-bold text-white" // Active page link
-                        previousClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Previous button
-                        previousLinkClassName="text-gray-700" // Previous link
-                        nextClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Next button
-                        nextLinkClassName="text-gray-700" // Next link
-                        breakClassName="px-3 py-1" // Ellipsis button
-                        breakLinkClassName="text-gray-700" // Ellipsis link
-                        disabledClassName="opacity-50 cursor-not-allowed" // Disabled button
+                        onPageChange={handlePageClick}
+                        containerClassName="flex items-center justify-center space-x-2 mt-4"
+
+                        pageClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition"
+                        pageLinkClassName="text-gray-700 dark:text-white"
+
+                        activeClassName="bg-blue-500 text-white"
+                        activeLinkClassName="font-bold text-white"
+
+                        previousClassName="px-3 py-1 border border-gray-300 rounded transition hover:bg-blue-500"
+                        previousLinkClassName="text-gray-700 dark:text-white hover:text-white"
+
+                        nextClassName="px-3 py-1 border border-gray-300 rounded transition hover:bg-blue-500"
+                        nextLinkClassName="text-gray-700 dark:text-white hover:text-white"
+
+                        breakClassName="px-3 py-1"
+                        breakLinkClassName="text-gray-700"
+
+                        disabledClassName="opacity-50 cursor-not-allowed"
                     />
+
                     <div className="flex  gap-4">
                         <p>Select Limit : </p>
                         <select value={limit} onChange={((e) => { setLimit(e.target.value), setCurrentPage(0) })} className="select select-bordered w-full max-w-xs">
