@@ -7,6 +7,7 @@ import PremiumCard from "../../Components/Cards/PremiumCard/PremiumCard";
 import Select from "react-select";
 import { useState } from "react";
 import useAllPublisher from "../../Hooks/useAllPublisher";
+import useAuth from "../../Hooks/useAuth";
 
 const AllArticles = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,6 +15,7 @@ const AllArticles = () => {
     const [search, setSearch] = useState('');
     const [publicationFilter, setPublicationFiler] = useState('');
     const [publishers] = useAllPublisher();
+    const {darkMode} = useAuth();
 
     const { data: AllArticles = [], isLoading } = useQuery({
         queryKey: ['all-articles-approved', selectedOptions.map(o => o.value), publicationFilter, search],
@@ -42,6 +44,45 @@ const AllArticles = () => {
         { value: 'culture', label: 'Culture' },
         { value: 'environment', label: 'Environment' },
     ];
+
+    const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 in dark mode
+          borderColor: state.isFocused ? (darkMode ? "#3B82F6" : "#2563EB") : "#D1D5DB",
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        menu: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 in dark mode
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isFocused ? (darkMode ? "#4B5563" : "#E5E7EB") : "transparent", // Slightly lighter shade for hover
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValue: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#4B5563" : "#E5E7EB", // Multi-value background
+        }),
+        multiValueLabel: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValueRemove: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+          ":hover": {
+            backgroundColor: darkMode ? "#DC2626" : "#EF4444",
+            color: "#ffffff",
+          },
+        }),
+      };
+      
 
     // tags selection
     const handleChangeTags = (selected) => {
@@ -91,6 +132,7 @@ const AllArticles = () => {
                             value={selectedOptions}
                             onChange={handleChangeTags}
                             placeholder="Select tags..."
+                            styles={customStyles}
                         />
                     </div>
                 </div>

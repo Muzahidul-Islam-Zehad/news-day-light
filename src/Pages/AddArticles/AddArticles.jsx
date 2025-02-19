@@ -16,7 +16,7 @@ const AddArticles = () => {
     const [photoName, setPhotoName] = useState(null);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [errMsg, setErrMsg] = useState(null);
-    const { user } = useAuth();
+    const { user, darkMode } = useAuth();
     const [articleLoading, setArticleLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
@@ -49,6 +49,45 @@ const AddArticles = () => {
         { value: 'culture', label: 'Culture' },
         { value: 'environment', label: 'Environment' },
     ];
+
+    const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 in dark mode
+          borderColor: state.isFocused ? (darkMode ? "#3B82F6" : "#2563EB") : "#D1D5DB",
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        menu: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 in dark mode
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isFocused ? (darkMode ? "#4B5563" : "#E5E7EB") : "transparent", // Slightly lighter shade for hover
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValue: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#4B5563" : "#E5E7EB", // Multi-value background
+        }),
+        multiValueLabel: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValueRemove: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+          ":hover": {
+            backgroundColor: darkMode ? "#DC2626" : "#EF4444",
+            color: "#ffffff",
+          },
+        }),
+      };
+      
 
 
 
@@ -206,6 +245,7 @@ const AddArticles = () => {
                             value={selectedOptions}
                             onChange={handleChangeTags}
                             placeholder="Select tags..."
+                            styles={customStyles}
                         />
                     </div>
 

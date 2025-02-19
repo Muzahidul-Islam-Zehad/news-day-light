@@ -16,7 +16,7 @@ const Payment = () => {
     const axiosSecure = useAxiosSecure();
     const stripe = useStripe();
     const elements = useElements();
-    const { user , setSubscribed} = useAuth();
+    const { user , setSubscribed, darkMode} = useAuth();
 
     useEffect(() => {
         if (!paymentInformation) {
@@ -79,6 +79,25 @@ const Payment = () => {
         }
     }
 
+
+    const cardStyle = {
+        style: {
+          base: {
+            backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 for dark, white for light
+            color: darkMode ? "#ffffff" : "#000000", // White text in dark mode, black in light mode
+            fontSize: "16px",
+            "::placeholder": {
+              color: darkMode ? "#9CA3AF" : "#6B7280", // text-gray-400 for dark, text-gray-600 for light
+            },
+            padding: "12px",
+            borderRadius: "8px",
+            border: `1px solid ${darkMode ? "#4B5563" : "#D1D5DB"}`, // border-gray-600 for dark, border-gray-300 for light
+          },
+          invalid: {
+            color: "#EF4444", // Red-500 for invalid input
+          },
+        },
+      };
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900">
             <div className="bg-white rounded-lg shadow-md p-8 w-full max-w-md dark:bg-gray-800 dark:shadow-gray-600">
@@ -87,8 +106,8 @@ const Payment = () => {
                     <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-400">${amount}</h2>
                 </div>
                 <form onSubmit={handlePayment} className="space-y-6">
-                    <div className="border p-4 rounded-lg bg-gray-50">
-                        <CardElement />
+                    <div className="border p-4 rounded-lg bg-gray-50 dark:bg-gray-700">
+                        <CardElement options={cardStyle}/>
                     </div>
                     <button
                         disabled={!stripe || !elements || loading}

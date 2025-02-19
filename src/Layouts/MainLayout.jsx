@@ -6,7 +6,7 @@ const MainLayout = () => {
 
     return (
         <div>
-            <div className="sticky top-0 z-50">
+            <div className="sticky top-0 z-40">
                 <Navbar></Navbar>
             </div>
             <div className="min-h-[calc(100vh-334px)] dark:bg-gray-900">

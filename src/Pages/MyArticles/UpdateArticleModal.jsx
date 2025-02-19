@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { BsBrightnessHighFill } from "react-icons/bs";
 import useAllPublisher from "../../Hooks/useAllPublisher";
 import LoadingSpinner from "../../Components/LoadingSpinner/LoadingSpinner";
+import useAuth from "../../Hooks/useAuth";
 
 const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
 
@@ -21,6 +22,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
     const [articleLoading, setArticleLoading] = useState(false);
     const [publishers, isLoading] = useAllPublisher();
     const [modifiedTagss, setModifiedTagss] = useState([]);
+    const {darkMode} = useAuth();
 
     useEffect(() => {
 
@@ -73,6 +75,45 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
         { value: 'environment', label: 'Environment' },
     ];
 
+
+    const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#1F2937" : "#ffffff", // bg-gray-700 in dark mode
+          borderColor: state.isFocused ? (darkMode ? "#3B82F6" : "#2563EB") : "#D1D5DB",
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        menu: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#374151" : "#ffffff", // bg-gray-700 in dark mode
+        }),
+        option: (provided, state) => ({
+          ...provided,
+          backgroundColor: state.isFocused ? (darkMode ? "#4B5563" : "#E5E7EB") : "transparent", // Slightly lighter shade for hover
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        singleValue: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValue: (provided) => ({
+          ...provided,
+          backgroundColor: darkMode ? "#4B5563" : "#E5E7EB", // Multi-value background
+        }),
+        multiValueLabel: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+        }),
+        multiValueRemove: (provided) => ({
+          ...provided,
+          color: darkMode ? "#ffffff" : "#000000",
+          ":hover": {
+            backgroundColor: darkMode ? "#DC2626" : "#EF4444",
+            color: "#ffffff",
+          },
+        }),
+      };
+      
 
 
     const handleImageUpload = (e) => {
@@ -212,6 +253,7 @@ const UpdateArticleModal = ({ isOpen, onClose, article, refetch }) => {
                                     value={selectedOptions}
                                     onChange={handleTagChange}
                                     placeholder="Select tags..."
+                                    styles={customStyles}
                                     required
                                 />
                             </div>
