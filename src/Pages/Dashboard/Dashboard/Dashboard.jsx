@@ -27,31 +27,31 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2">
+                    <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4 space-y-2 dark:bg-gray-700">
                         {/* Sidebar content */}
                         <Link to={'/dashboard'} onClick={closeDrawer}>
-                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard' ? 'bg-slate-400 text-white' : ''}`}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white dark:text-white rounded-xl text-center ${pathname === '/dashboard' ? 'bg-slate-400 text-white' : ''}`}>
                                 Statistics
                             </div>
                         </Link>
                         <Link to={'/dashboard/all-users'} onClick={closeDrawer}>
-                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/all-users' ? 'bg-slate-400 text-white' : ''}`}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white dark:text-white rounded-xl text-center ${pathname === '/dashboard/all-users' ? 'bg-slate-400 text-white' : ''}`}>
                                 All Users
                             </div>
                         </Link>
                         <Link to={'/dashboard/all-articles-admin'} onClick={closeDrawer}>
-                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/all-articles-admin' ? 'bg-slate-400 text-white' : ''}`}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white dark:text-white rounded-xl text-center ${pathname === '/dashboard/all-articles-admin' ? 'bg-slate-400 text-white' : ''}`}>
                                 All Articles
                             </div>
                         </Link>
                         <Link to={'/dashboard/add-publisher'} onClick={closeDrawer}>
-                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/add-publisher' ? 'bg-slate-400 text-white' : ''}`}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white dark:text-white rounded-xl text-center ${pathname === '/dashboard/add-publisher' ? 'bg-slate-400 text-white' : ''}`}>
                                 Add Publisher
                             </div>
                         </Link>
                         <div className="divider mt-10"></div>
                         <Link to={'/dashboard/my-profile'} onClick={closeDrawer}>
-                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white rounded-xl text-center ${pathname === '/dashboard/my-profile' ? 'bg-slate-400 text-white' : ''}`}>
+                            <div className={`px-4 py-2 border-2 border-slate-400 hover:bg-slate-400 hover:text-white dark:text-white rounded-xl text-center ${pathname === '/dashboard/my-profile' ? 'bg-slate-400 text-white' : ''}`}>
                                 My Profile
                             </div>
                         </Link>

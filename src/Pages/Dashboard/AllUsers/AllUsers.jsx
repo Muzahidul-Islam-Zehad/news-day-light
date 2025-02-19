@@ -10,7 +10,7 @@ const AllUsers = () => {
 
     const axiosSecure = useAxiosSecure();
     const [currentPage, setCurrentPage] = useState(0);
-    const [limit, setLimit] = useState(5); 
+    const [limit, setLimit] = useState(5);
 
     const { data: allUsers = [], isLoading, refetch } = useQuery({
         queryKey: ['all-users', currentPage, limit],
@@ -21,7 +21,7 @@ const AllUsers = () => {
     });
 
     const handlePageClick = (event) => {
-        setCurrentPage(event.selected); 
+        setCurrentPage(event.selected);
     };
 
 
@@ -39,7 +39,7 @@ const AllUsers = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                     await axiosSecure.patch(`/make-admin/${id}`);
+                    await axiosSecure.patch(`/make-admin/${id}`);
                     // console.log(data);
                     Swal.fire({
                         title: "Changed To Admin!",
@@ -82,7 +82,7 @@ const AllUsers = () => {
                             :
                             <table className="table w-full border border-gray-300 rounded-lg shadow-md">
                                 {/* Table Head */}
-                                <thead className="bg-gray-200">
+                                <thead className="bg-gray-200 dark:bg-[#003366] dark:text-white">
                                     <tr>
                                         <th className="py-3 px-4 text-left">#</th>
                                         <th className="py-3 px-4 text-left">Profile</th>
@@ -97,7 +97,7 @@ const AllUsers = () => {
                                     {
                                         allUsers?.users.map((user, idx) =>
 
-                                            <tr key={user._id} className="hover:bg-gray-100 border-t">
+                                            <tr key={user._id} className=" border-t dark:text-gray-200">
                                                 <td className="py-3 px-4">{idx + 1}</td>
                                                 <td className="py-3 px-4">
                                                     <div className="flex items-center gap-3">
@@ -118,7 +118,7 @@ const AllUsers = () => {
 
                                                         user?.role === 'Admin'
                                                             ?
-                                                            <span className="font-bold  bg-lime-200 py-1 px-3 rounded-xl">Admin</span>
+                                                            <span className="font-bold  bg-lime-200 py-1 px-3 rounded-xl dark:text-black">Admin</span>
                                                             :
                                                             <button onClick={() => handleUpdateToAdmin(user._id)} className="btn btn-md bg-blue-500 text-white hover:bg-blue-600 rounded-md px-4 py-2">
                                                                 Make Admin
@@ -143,23 +143,30 @@ const AllUsers = () => {
                         pageCount={allUsers?.totalPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={3}
-                        onPageChange={handlePageClick} // Handle page click
-                        containerClassName="flex items-center justify-center space-x-2 mt-4" // Overall pagination container
-                        pageClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Page item
-                        pageLinkClassName="text-gray-700" // Page link
-                        activeClassName="bg-blue-500 text-white" // Active page
-                        activeLinkClassName="font-bold text-white" // Active page link
-                        previousClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Previous button
-                        previousLinkClassName="text-gray-700" // Previous link
-                        nextClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition" // Next button
-                        nextLinkClassName="text-gray-700" // Next link
-                        breakClassName="px-3 py-1" // Ellipsis button
-                        breakLinkClassName="text-gray-700" // Ellipsis link
-                        disabledClassName="opacity-50 cursor-not-allowed" // Disabled button
+                        onPageChange={handlePageClick}
+                        containerClassName="flex items-center justify-center space-x-2 mt-4"
+
+                        pageClassName="px-3 py-1 border border-gray-300 rounded hover:bg-blue-500 hover:text-white transition"
+                        pageLinkClassName="text-gray-700 dark:text-white"
+
+                        activeClassName="bg-blue-500 text-white"
+                        activeLinkClassName="font-bold text-white"
+
+                        previousClassName="px-3 py-1 border border-gray-300 rounded transition hover:bg-blue-500"
+                        previousLinkClassName="text-gray-700 dark:text-white hover:text-white"
+
+                        nextClassName="px-3 py-1 border border-gray-300 rounded transition hover:bg-blue-500"
+                        nextLinkClassName="text-gray-700 dark:text-white hover:text-white"
+
+                        breakClassName="px-3 py-1"
+                        breakLinkClassName="text-gray-700"
+
+                        disabledClassName="opacity-50 cursor-not-allowed"
                     />
+
                     <div className="flex  gap-4">
                         <p>Select Limit : </p>
-                        <select value={limit} onChange={((e) => {setLimit(e.target.value),setCurrentPage(0)})} className="select select-bordered w-full max-w-xs">
+                        <select value={limit} onChange={((e) => { setLimit(e.target.value), setCurrentPage(0) })} className="select select-bordered w-full max-w-xs dark:bg-gray-700 dark:text-white">
                             <option value={3}>3</option>
                             <option value={5}>5</option>
                             <option value={10}>10</option>

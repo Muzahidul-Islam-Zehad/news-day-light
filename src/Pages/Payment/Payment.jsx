@@ -97,7 +97,7 @@ const Payment = () => {
                     >
                         {
                             loading ?
-                                <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
+                                <span className="text-xl animate-spin dark:text-white"><BsBrightnessHighFill /></span>
                                 :
                                 `Pay $${amount}`
                         }
