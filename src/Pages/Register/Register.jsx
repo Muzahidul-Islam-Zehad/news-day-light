@@ -18,7 +18,7 @@ const Register = () => {
     const [isVisible, setIsVisible] = useState(false);
     const axiosPublic = useAxiosPublic();
     const [registerLoading, setRegisterLoading] = useState(false);
-   
+
 
     const handleImageUpload = (e) => {
         const imageName = imageNameShorter(e.target.files);
@@ -29,7 +29,7 @@ const Register = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setErrMsg('');
-        
+
 
         const form = e.target;
         const name = form.name.value;
@@ -48,17 +48,16 @@ const Register = () => {
         const upperCaseRegEx = /[A-Z]/;
         const numaricCaseRegEx = /[0-9]/;
 
-        const userInfo= {email}
+        const userInfo = { email }
 
-        const {data} = await axiosPublic.post('/users', userInfo);
+        const { data } = await axiosPublic.post('/users', userInfo);
 
         // console.log(data);
 
-        if(!data.message)
-        {
+        if (!data.message) {
             setErrMsg('Email already registered');
             setRegisterLoading(false);
-            return ;
+            return;
         }
         if (password.length < 6) {
             setErrMsg('Password should be atleast 6 character');
@@ -84,7 +83,7 @@ const Register = () => {
 
 
         const photoURL = await imageUploadToImageBB(image)
-        
+
 
         try {
 
@@ -95,16 +94,16 @@ const Register = () => {
             await updateUserProfile({ displayName: name, photoURL });
 
             //add new user in database
-            await axiosPublic.post('/users/new', {name,email,photoURL})
+            await axiosPublic.post('/users/new', { name, email, photoURL })
 
-            toast.success('Registration successful' , {
+            toast.success('Registration successful', {
                 duration: 1000,
             })
 
             navigate('/');
         }
         catch (err) {
-            toast.error('Registration Failed' , {
+            toast.error('Registration Failed', {
                 duration: 1000,
             })
             console.log(err);
@@ -118,17 +117,17 @@ const Register = () => {
 
     const handleGoogleLogin = async () => {
         try {
-            const {user} = await googleLogin();
+            const { user } = await googleLogin();
 
             const userInfo = {
-                name : user.displayName,
-                email : user.email,
+                name: user.displayName,
+                email: user.email,
                 photoURL: user.photoURL
             }
 
-            await axiosPublic.post('/users/new/google' , userInfo);
-            
-            toast.success('Login successful' , {
+            await axiosPublic.post('/users/new/google', userInfo);
+
+            toast.success('Login successful', {
                 duration: 1000,
             })
             navigate('/');
@@ -141,7 +140,7 @@ const Register = () => {
         }
     }
 
-    const handleEyeButton = () =>{
+    const handleEyeButton = () => {
         setIsVisible(!isVisible);
     }
     if (loading) {
@@ -152,6 +151,7 @@ const Register = () => {
         <div className="flex justify-center items-center min-h-screen bg-[#F4F6F8] py-10">
             <div className="card bg-base-100 w-full max-w-md shrink-0 shadow-2xl">
                 <div className="text-center pt-4">
+                    <Link to={`/`} className="flex justify-center w-1/4 mx-auto"><img className="w-14" src={`https://i.ibb.co.com/Y7VfxdWN/news-Day-Light-Logo-Final.png`} alt="" /></Link>
                     <h1 className="text-3xl font-bold text-[#003366]">Register Here</h1>
                     <p className="text-[#6C757D]">Register to explore news</p>
                     <hr className="mt-3 w-5/6 mx-auto" />
@@ -193,7 +193,7 @@ const Register = () => {
                             <span className="label-text text-[#6C757D]">Password<span className="text-red-600 font-bold">*</span></span>
                         </label>
                         <div className="relative">
-                            <input type={isVisible? 'text' : 'password'} name="password" placeholder="password" className="input input-bordered w-full bg-[#F9FAFB] border border-[#D1D5DB] text-[#333333] focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] placeholder:text-[#A0AEC0]" />
+                            <input type={isVisible ? 'text' : 'password'} name="password" placeholder="password" className="input input-bordered w-full bg-[#F9FAFB] border border-[#D1D5DB] text-[#333333] focus:ring-2 focus:ring-[#00B4D8] focus:outline-none focus:border-[#00B4D8] placeholder:text-[#A0AEC0]" />
                             <div onClick={handleEyeButton} className="absolute right-4 top-2 p-2 cursor-pointer">
                                 {
                                     isVisible ?
@@ -216,11 +216,11 @@ const Register = () => {
                     </div>
                     <div className="form-control mt-6">
                         <button disabled={registerLoading || loading} className="btn bg-[#003366] text-white hover:bg-[#002B55]">{
-                            registerLoading?
-                            <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
-                            :
-                            'Register'
-                            }</button>
+                            registerLoading ?
+                                <span className="text-xl animate-spin"><BsBrightnessHighFill /></span>
+                                :
+                                'Register'
+                        }</button>
                     </div>
                 </form>
                 <div className="divider w-5/6 mx-auto">OR</div>
